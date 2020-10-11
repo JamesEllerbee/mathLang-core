@@ -8,7 +8,7 @@ public class CommandDirectory
             new SimplifyCommand(),
             new SolveCommand(), new GraphCommand(),
             new ClearCommand(),
-            new QuitCommand(),
+            //new QuitCommand(),
     };
 
     private static Command findCommand(String target)

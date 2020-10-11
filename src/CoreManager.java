@@ -15,6 +15,15 @@ public class CoreManager
         return coreManagerInstance;
     }
 
+    public static String[] parseInput(String input){
+        String[] tokens = input.split(" ", 2);
+        if(tokens.length == 2) {
+            return tokens;
+        } else {
+            return new String[]{input, ""};
+        }
+    }
+
     private MODE currentMode;
 
     public void setCurrentMode(MODE newMode) {
