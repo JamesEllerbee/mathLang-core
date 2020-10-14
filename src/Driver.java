@@ -17,10 +17,9 @@ public class Driver
             System.out.println(core.render());
             System.out.printf("> ");
             usrin = sc.nextLine();
-            tokens = CoreManager.parseInput(usrin);
-            cmd = CommandDirectory.getCommand(tokens[0]);
+            cmd = CommandDirectory.getCommand(usrin);
             if(cmd != null){
-                cmd.performAction(tokens[1]);
+                cmd.performAction(usrin);
             }
         }
     }

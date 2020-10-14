@@ -16,6 +16,7 @@ public class CoreManager
     }
 
     public static String[] parseInput(String input){
+        //todo fix
         String[] tokens = input.split(" ", 2);
         if(tokens.length == 2) {
             return tokens;
