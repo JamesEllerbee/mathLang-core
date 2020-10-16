@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="mathLang-core:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2787a997-10a5-43ff-8b7e-4c834cff4557" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Driver.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,22 +83,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1602634343592" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1602634761468">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1602640627784">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1602634761468" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1602634761468">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1602640627784" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1602640627784">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1602634761468" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1602634761468">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1602640627784" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1602640627784">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1602634761468" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1602634761468">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1602640627784" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1602640627784">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1602634761468" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1602640627784" />
     <state x="440" y="94" key="SettingsEditor" timestamp="1602635936867">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
