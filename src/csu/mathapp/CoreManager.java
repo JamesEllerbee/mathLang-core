@@ -8,6 +8,8 @@ State manager for the math lang core project
 
 public class CoreManager
 {
+    final int MAX_NUM_LINE = 20;
+
     private static CoreManager coreManagerInstance;
 
     public static CoreManager getCoreManagerInstance() {
@@ -47,6 +49,10 @@ public class CoreManager
 
     }
 
+    /**
+     *
+     * @param whatToAdd, the string
+     */
     public void appendToBody(String whatToAdd) {
         if (whatToAdd != null)
         {
