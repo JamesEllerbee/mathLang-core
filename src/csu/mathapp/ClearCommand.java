@@ -10,7 +10,6 @@ public class ClearCommand extends Command {
 
     @Override
     public void performAction(String param) {
-        //TODO refactor to csu.mathapp.CoreManager!
-        //MainFormManager.getMainFormManagerInstance().appendToBody("");
+        CoreManager.getCoreManagerInstance().appendToBody("");
     }
 }

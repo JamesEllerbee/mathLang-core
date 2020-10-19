@@ -94,5 +94,6 @@ public class GraphCommand extends Command
         //MainFormManager mfm = MainFormManager.getMainFormManagerInstance();
         //spawnPlotter(param);
         //this.updateProperty.firePropertyChange("numGraphs", null, 1);
+        CoreManager.getCoreManagerInstance().appendToBody("<em>This is not currently implemented for web!</em>");
     }
 }
