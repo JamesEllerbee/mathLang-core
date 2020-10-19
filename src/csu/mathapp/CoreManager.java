@@ -1,32 +1,38 @@
 package csu.mathapp;
 
+import java.util.HashMap;
+
 /**
-State manager for the math lang core project
- author: James Ellerbee
- v0.01 (2020/10/7)
+ * State manager for the math lang core project
+ * author: James Ellerbee
+ * v1.0 (2020/10/19)
  */
 
 public class CoreManager
 {
     final int MAX_NUM_LINE = 20;
 
-    private static CoreManager coreManagerInstance;
+    private static HashMap<String, CoreManager> coreManagerInstances;
 
-    public static CoreManager getCoreManagerInstance() {
-        if (coreManagerInstance == null) {
-            coreManagerInstance = new CoreManager();
+    /**
+     * Returns the CoreManager that coresponds to the sessionId
+     * @param sessionId
+     * @return the current or new CoreManager
+     */
+    public static CoreManager getCoreManagerInstance(String sessionId) {
+        if(coreManagerInstances == null) {
+            coreManagerInstances = new HashMap<String, CoreManager>();
         }
-        return coreManagerInstance;
-    }
 
-    public static String[] parseInput(String input){
-        //todo fix
-        String[] tokens = input.split(" ", 2);
-        if(tokens.length == 2) {
-            return tokens;
-        } else {
-            return new String[]{input, ""};
+        if(sessionId != null) {
+           CoreManager cm = coreManagerInstances.get(sessionId);
+           if(cm == null) {
+               cm = new CoreManager();
+               coreManagerInstances.put(sessionId, cm);
+           }
+           return cm;
         }
+        return null;
     }
 
     private MODE currentMode;
@@ -46,14 +52,14 @@ public class CoreManager
         body = "";
         appendToBody("<strong>Initializing...</strong><br><strong>Current output mode</strong>: "
                 + "<i>" + currentMode.name().toLowerCase().replace('_', ' ') + "</i>.");
-
     }
 
     /**
-     *
-     * @param whatToAdd, the string
+     * Appends content to the body
+     * @param whatToAdd, the string containing new content
      */
     public void appendToBody(String whatToAdd) {
+        //TODO implement content limiter, split body regex=<br> if length > MAX_NUM_LINES, ignore the first n lines of the body
         if (whatToAdd != null)
         {
             if (whatToAdd.equals(""))

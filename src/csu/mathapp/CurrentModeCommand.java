@@ -10,8 +10,8 @@ public class CurrentModeCommand extends Command
     }
 
     @Override
-    public void performAction(String param) {
-        CoreManager core = CoreManager.getCoreManagerInstance();
+    public void performAction(String param, String sessionId) {
+        CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
         core.appendToBody("Current mode is <i>" + core.getCurrentMode().name().toLowerCase().replace('_', ' ') + "</i>");
     }
 }

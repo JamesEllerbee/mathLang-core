@@ -124,10 +124,10 @@ public class SimplifyCommand extends Command
     }
 
     @Override
-    public void performAction(String param)
+    public void performAction(String param, String sessionId)
     {
-        CoreManager core = CoreManager.getCoreManagerInstance();
-        core.appendToBody("csu.mathapp.Command not yet fully implemented");
+        CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
+        core.appendToBody("Command not yet fully implemented");
         String[] tokens = param.split(" ", 2);
         if (isBinomialMultiplication(tokens[1]))
         {

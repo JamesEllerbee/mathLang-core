@@ -88,12 +88,12 @@ public class GraphCommand extends Command
     }
 
     @Override
-    public void performAction(String param)
+    public void performAction(String param, String sessionId)
     {
         //TODO implement action
         //MainFormManager mfm = MainFormManager.getMainFormManagerInstance();
         //spawnPlotter(param);
         //this.updateProperty.firePropertyChange("numGraphs", null, 1);
-        CoreManager.getCoreManagerInstance().appendToBody("<em>This is not currently implemented for web!</em>");
+        CoreManager.getCoreManagerInstance(sessionId).appendToBody("<em>This is not currently implemented for web!</em>");
     }
 }

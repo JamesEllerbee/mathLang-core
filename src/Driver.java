@@ -6,10 +6,12 @@ import java.util.Scanner;
 
 public class Driver
 {
+    public static String sessionId = "development";
+
     public static void main(String[] args)
     {
         //dev code
-        CoreManager cm = CoreManager.getCoreManagerInstance();
+        CoreManager cm = CoreManager.getCoreManagerInstance(sessionId);
         Scanner sc = new Scanner(System.in);
         String commandString = "";
         Command cmd;
@@ -19,7 +21,7 @@ public class Driver
             commandString = sc.nextLine();
             cmd = CommandDirectory.getCommand(commandString);
             if(cmd != null){
-                cmd.performAction(commandString);
+                cmd.performAction(commandString, sessionId);
             } else {
                 System.out.println("command not found.");
             }

@@ -11,8 +11,29 @@
   <component name="ChangeListManager">
     <list default="true" id="2787a997-10a5-43ff-8b7e-4c834cff4557" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/mathLang_core_jar/mathLang-core.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/mathLang_core_jar/mathLang-core.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/Driver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/ChangeModeCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/ChangeModeCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/ClearCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/ClearCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/CommandInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/CommandInterface.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/CoreManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/CoreManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/CurrentModeCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/CurrentModeCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/GraphCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/GraphCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/HelpCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/HelpCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/ShowProfileCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/ShowProfileCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/SimplifyCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/SimplifyCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/SolveCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/SolveCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/ChangeModeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/ChangeModeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/ClearCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/CommandInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/CommandInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/csu/mathapp/CoreManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/CoreManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/CurrentModeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/CurrentModeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/GraphCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/GraphCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/ShowProfileCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/ShowProfileCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/SimplifyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/SimplifyCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/SolveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/SolveCommand.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,11 +53,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1680" />
-    <option name="height" value="1027" />
   </component>
   <component name="ProjectId" id="1ikFUHVdyWqwNPBzryt5mAlHN7A" />
   <component name="ProjectViewState">
@@ -93,26 +109,34 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603146497654">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603146497654" />
+    <state x="743" y="414" width="433" height="217" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1603147419664">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="743" y="414" width="433" height="217" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603147419664" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1602634343592">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1602634343592" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1603146114089">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1603147514621">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603146114089" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1603146114089">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603147514621" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1603147514620">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603146114089" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1603146114089">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603147514620" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1603147514620">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603146114088" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1603146114089">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603147514620" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1603147514621">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603146114089" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603147514621" />
     <state x="440" y="94" key="SettingsEditor" timestamp="1602635936867">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

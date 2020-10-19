@@ -10,7 +10,7 @@ public class ShowProfileCommand extends Command
     }
 
     @Override
-    public void performAction(String param)
+    public void performAction(String param, String sessionId)
     {
         //MainFormManager.getMainFormManagerInstance().getProfileForm().showProfile();
         //TODO implement action

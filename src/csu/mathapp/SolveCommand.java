@@ -181,18 +181,18 @@ public class SolveCommand extends Command
         return coefficient;
     }
 
-    private void solveEquation(String equation, String[] tokens, char symbol)
+    private void solveEquation(String equation, String[] tokens, char symbol, String sessionId)
     {
-        CoreManager mfm = CoreManager.getCoreManagerInstance();
+        CoreManager mfm = CoreManager.getCoreManagerInstance(sessionId);
         System.out.println("this is the equation: " + equation);
         boolean isStandardQuadraticForm = Pattern.matches("\\s*-?\\s*[0-9]*[a-z]\\^2\\s*[+-]\\s*-?\\s*[0-9]*[a-z]\\s*[+-]\\s*-?\\s*[0-9]+\\s*=\\s*0\\s*", equation) || Pattern.matches("\\s*-?[0-9]*[a-z]\\^2\\s*[+-]\\s*[0-9]*[a-z]\\s*=\\s*-?\\s*[0-9]\\s*", equation); //TODO check for equation of form ax^2 + bx + c = 0 or ax^2 + bx = c
         if (!isStandardQuadraticForm)
         {
-            solveLinearEquation(tokens, symbol);
+            solveLinearEquation(tokens, symbol, sessionId);
         }
         else if (isStandardQuadraticForm)
         {
-            solveQuadraticEquation(tokens, symbol, "standard");
+            solveQuadraticEquation(tokens, symbol, "standard", sessionId);
         }
         else
         {
@@ -287,9 +287,9 @@ public class SolveCommand extends Command
      * @param tokens the array of tokens
      * @param symbol to solve the equation in terms of this symbol
      */
-    private void solveLinearEquation(String[] tokens, char symbol)
+    private void solveLinearEquation(String[] tokens, char symbol, String sessionId)
     {
-        CoreManager core = CoreManager.getCoreManagerInstance();
+        CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
         //todo simplify the equation fist. order terms in descending degree, on both sides of the equal sign, respect order of operations
         int indexOfESign = -1;
         int indexOfSymbol = 0; //assuming at least one of the symbols are in the 0th index
@@ -469,9 +469,9 @@ public class SolveCommand extends Command
         return (root - Math.floor(root)) == 0;
     }
 
-    private void solveQuadraticEquation(String[] tokens, char symbol, String type)
+    private void solveQuadraticEquation(String[] tokens, char symbol, String type, String sessionId)
     {
-        CoreManager core = CoreManager.getCoreManagerInstance();
+        CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
         System.out.println("In solve quad equ method");
         if (type.equals("standard"))
         {
@@ -632,16 +632,16 @@ public class SolveCommand extends Command
     }
 
     @Override
-    public void performAction(String param)
+    public void performAction(String param, String sessionId)
     {
-        CoreManager core = CoreManager.getCoreManagerInstance();
+        CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
         if (param.contains("="))
         {
             //this works for now, but in the future parse for a symbol until a ',' is found, probably strip whitespace
             char mainSymbol = param.charAt(this.getName().length() + 1);
             String theEquation = findEquation(param);
             core.appendToBody("Solving for " + mainSymbol + ", given equation '" + theEquation + "'...");
-            solveEquation(theEquation, parseEquation(theEquation, mainSymbol), mainSymbol);
+            solveEquation(theEquation, parseEquation(theEquation, mainSymbol), mainSymbol, sessionId);
         }
         else
         {

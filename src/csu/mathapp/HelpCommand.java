@@ -10,9 +10,9 @@ public class HelpCommand extends Command
     }
 
     @Override
-    public void performAction(String param)
+    public void performAction(String param, String sessionId)
     {
-        CoreManager core = CoreManager.getCoreManagerInstance();
+        CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
         String[] tokens = param.split(" ", 2);
         if (tokens.length == 1)
         {

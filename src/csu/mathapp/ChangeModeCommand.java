@@ -9,8 +9,8 @@ public class ChangeModeCommand extends Command {
     }
 
     @Override
-    public void performAction(String param) {
-        CoreManager core = CoreManager.getCoreManagerInstance();
+    public void performAction(String param, String sessionId) {
+        CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
         String[] tokens = param.split(" ", 3);
         core.setCurrentMode(MODE.valueOf(tokens[2].toUpperCase().replace(' ', '_')));
         core.appendToBody("<strong>Output mode changed to</strong> <i>" + core.getCurrentMode().name().toLowerCase().replace('_', ' ') + "</i>");
