@@ -19,7 +19,7 @@ public class Driver
 
     final static String body = "<body class=\"theme\">"
             + "<div class=\"jumbotron\">"
-            + "<h1 class=\"display-4 text-center\">MathApp.xyz!</h1>"
+            + "<h1 class=\"display-5 text-center\">MathApp.xyz!</h1>"
             + "</div>"
             + "<div class=\"main\">"
             + "%s"
@@ -35,10 +35,12 @@ public class Driver
             + "</body>";
 
     final static String[] commandsToRun = {
-            "clear",
             "help",
             "current mode",
             "show graph for ",
+            "show graph for simple constant function",
+            "show graph for simple linear function",
+            "show graph for simple quadratic function",
             "show profile",
             "simplify garbagetext",
             "simplify x+y+z",
@@ -51,7 +53,6 @@ public class Driver
     public static void main(String[] args)
     {
         //dev code
-
         CoreManager cm = CoreManager.getCoreManagerInstance(sessionId);
         Command cmd;
         for (String commandStr : commandsToRun)

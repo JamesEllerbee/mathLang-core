@@ -12,6 +12,6 @@ public class CurrentModeCommand extends Command
     @Override
     public void performAction(String param, String sessionId) {
         CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
-        core.appendToBody("Current mode is <i>" + core.getCurrentMode().name().toLowerCase().replace('_', ' ') + "</i>");
+        core.appendToBody("<div class=\"alert alert-info\">Current mode is <span class=\"text-monospace\">" + core.getCurrentMode().name().toLowerCase().replace('_', ' ') + "</span></div>");
     }
 }

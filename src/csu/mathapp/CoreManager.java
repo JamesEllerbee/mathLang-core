@@ -47,11 +47,24 @@ public class CoreManager
 
     private String body;
 
-    public CoreManager() {
+    private String root;
+
+    private CoreManager() {
         currentMode = MODE.STEP_BY_STEP;
         body = "";
+
+        root = "./";
         appendToBody("<strong>Initializing...</strong><br><strong>Current output mode</strong>: "
-                + "<i>" + currentMode.name().toLowerCase().replace('_', ' ') + "</i>.");
+                + "<span class=\"text-monospace\">" + currentMode.name().toLowerCase().replace('_', ' ') + "</span>.<br>"
+                + "<div class=\"alert alert-info\">To get start, use command 'help' to see available commands and their descriptions</div>");
+    }
+
+    public void setRoot(String root){
+        this.root = root;
+    }
+
+    public String getRoot() {
+        return this.root;
     }
 
     /**

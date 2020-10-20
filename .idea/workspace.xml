@@ -10,13 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2787a997-10a5-43ff-8b7e-4c834cff4557" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/xchart_3_6_5.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mathLang-core.iml" beforeDir="false" afterPath="$PROJECT_DIR$/mathLang-core.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/Driver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/CoreManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/CoreManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/CurrentModeCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/CurrentModeCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/GraphCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/GraphCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/SimplifyCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/mathLang-core/csu/mathapp/SimplifyCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample.html" beforeDir="false" afterPath="$PROJECT_DIR$/sample.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/CommandDirectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/CommandDirectory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/CoreManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/CoreManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/CurrentModeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/CurrentModeCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/csu/mathapp/GraphCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/GraphCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/ShowProfileCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/ShowProfileCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/csu/mathapp/SimplifyCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/SimplifyCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/csu/mathapp/SolveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/csu/mathapp/SolveCommand.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +51,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Facets" />
+    <property name="last_opened_file_path" value="E:/projectjars/xchart-3.6.5.jar" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.20588236" />
   </component>
@@ -100,46 +107,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="743" y="414" width="433" height="217" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603163734559" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1602634343592">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1603234698871">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1602634343592" />
-    <state width="1877" height="283" key="GridCell.Tab.0.bottom" timestamp="1603164186748">
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603234698871" />
+    <state width="1877" height="299" key="GridCell.Tab.0.bottom" timestamp="1603235701470">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="283" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603164186748" />
-    <state width="1877" height="283" key="GridCell.Tab.0.center" timestamp="1603164186748">
+    <state width="1877" height="299" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603235701470" />
+    <state width="1877" height="299" key="GridCell.Tab.0.center" timestamp="1603235701469">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="283" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603164186748" />
-    <state width="1877" height="283" key="GridCell.Tab.0.left" timestamp="1603164186748">
+    <state width="1877" height="299" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603235701469" />
+    <state width="1877" height="299" key="GridCell.Tab.0.left" timestamp="1603235701469">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="283" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603164186748" />
-    <state width="1877" height="283" key="GridCell.Tab.0.right" timestamp="1603164186748">
+    <state width="1877" height="299" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603235701469" />
+    <state width="1877" height="299" key="GridCell.Tab.0.right" timestamp="1603235701469">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="283" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603164186748" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1603162505403">
+    <state width="1877" height="299" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603235701469" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1603234364941">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603162505403" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1603162505403">
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603234364941" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1603234364941">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603162505403" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1603162505403">
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603234364941" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1603234364941">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603162505403" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1603162505403">
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603234364941" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1603234364941">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603162505403" />
-    <state x="440" y="94" key="SettingsEditor" timestamp="1603162894801">
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603234364941" />
+    <state x="594" y="121" key="SettingsEditor" timestamp="1603234743072">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603162894801" />
+    <state x="594" y="121" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1080/-1080.-853.1080.1920@0.0.1920.1040" timestamp="1603234743072" />
     <state x="681" y="261" width="540" height="524" key="StructurePopup" timestamp="1603146045234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
