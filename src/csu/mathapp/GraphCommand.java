@@ -146,7 +146,7 @@ public class GraphCommand extends Command
                     yData[i] = xData[i];
                 }
                 XYChart chart = new XYChart(500, 400);
-                chart.setTitle("simple constant function");
+                chart.setTitle("simple linear function");
                 chart.setXAxisTitle("X");
                 chart.setYAxisTitle("Y");
                 XYSeries series = chart.addSeries("f(x)", xData,yData);
