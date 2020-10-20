@@ -25,7 +25,7 @@ public class CommandDirectory
         return null;
     }
 
-    public static Command getCommand(String command)
+    public static Command getCommand(String command, String sesssionId)
     {
         String[] tokens = command.split(" ", 4);
         Command cmd = findCommand(tokens[0]);
@@ -38,15 +38,13 @@ public class CommandDirectory
         {
             cmd = findCommand(tokens[0] + " " + tokens[1] + " " + tokens[2]);
         }
-        else
-        {
-            return cmd;
-        }
+
         if (cmd != null)
         {
             return cmd;
         }
-        System.err.println("No command for input " + command);
+        //System.err.println("No command for input " + command);
+        CoreManager.getCoreManagerInstance(sesssionId).appendToBody("<div class=\"alert alert-danger\">Error: No such command!</div>");
         return null;
     }
 

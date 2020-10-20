@@ -99,11 +99,13 @@ public class SimplifyCommand extends Command
                 curIndex++;
             }
         }
-
+/*
         for(String ele : terms)
         {
             System.out.print(ele + ", ");
         }
+
+ */
         return terms;
 
     }
@@ -127,7 +129,7 @@ public class SimplifyCommand extends Command
     public void performAction(String param, String sessionId)
     {
         CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
-        core.appendToBody("Command not yet fully implemented");
+        core.appendToBody("<div class=\"alert alert-warning\">Warning: This command is not yet fully implemented!</div>");
         String[] tokens = param.split(" ", 2);
         if (isBinomialMultiplication(tokens[1]))
         {
@@ -135,7 +137,7 @@ public class SimplifyCommand extends Command
             core.appendToBody("Use the <b>F.O.I.L</b> method, multiply the first, outer, inner, and last.");
             core.appendToBody("<img src=\"https://calcworkshop.com/wp-content/uploads/foil-method-formula.png\" height=\"400\" width=\"600\">");
             core.appendToBody("Therefore (ax + b)(cx + d) expanded = acx<sup>2</sup> + adx + bcx + bd");
-            System.out.println(tokens[1].replace(" ", ""));
+            //System.out.println(tokens[1].replace(" ", ""));
             String[] expr = parseTerms(tokens[1]);
             char symbol = getSymbol(tokens[1]);
             int a, b, c, d;
@@ -144,13 +146,13 @@ public class SimplifyCommand extends Command
             c = Integer.parseInt(getCoefficient(expr[2]));
             d = Integer.parseInt(getCoefficient(expr[3]));
             core.appendToBody(String.format("Where a = %d, b = %d, c = %d, d = %d", a,b,c,d));
-            System.out.println(String.format("%d %d %d %d",a,b,c,d));
+            //System.out.println(String.format("%d %d %d %d",a,b,c,d));
             core.appendToBody(String.format("(%d)(%d)%c<sup>2</sup> + (%d)(%d)%c + (%d)(%d)%c + (%d)(%d)",a,c,symbol,a,d,symbol,b,c,symbol,b,d));
             core.appendToBody(String.format("%d%c<sup>2</sup> + %d%c + %d",a*c,symbol,a*d+b*c,symbol,b*d));
         }
         else
         {
-            core.appendToBody("Expression not recognized");
+            core.appendToBody("<div class=\"alert alert-primary\">Expression not recognized or not currently support</div>");
         }
     }
 }

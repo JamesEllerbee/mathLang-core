@@ -1,6 +1,5 @@
 package csu.mathapp;
 
-import javax.swing.*;
 import java.beans.PropertyChangeSupport;
 import java.util.regex.Pattern;
 
@@ -184,7 +183,7 @@ public class SolveCommand extends Command
     private void solveEquation(String equation, String[] tokens, char symbol, String sessionId)
     {
         CoreManager mfm = CoreManager.getCoreManagerInstance(sessionId);
-        System.out.println("this is the equation: " + equation);
+        //System.out.println("this is the equation: " + equation);
         boolean isStandardQuadraticForm = Pattern.matches("\\s*-?\\s*[0-9]*[a-z]\\^2\\s*[+-]\\s*-?\\s*[0-9]*[a-z]\\s*[+-]\\s*-?\\s*[0-9]+\\s*=\\s*0\\s*", equation) || Pattern.matches("\\s*-?[0-9]*[a-z]\\^2\\s*[+-]\\s*[0-9]*[a-z]\\s*=\\s*-?\\s*[0-9]\\s*", equation); //TODO check for equation of form ax^2 + bx + c = 0 or ax^2 + bx = c
         if (!isStandardQuadraticForm)
         {
@@ -196,16 +195,12 @@ public class SolveCommand extends Command
         }
         else
         {
-            mfm.appendToBody("<font color=\"red\"><strong>Error!</strong></font> Unable to solve in current arrangement");
+            mfm.appendToBody("<div class=\"alert alert-danger\"><strong>Error: Unable to solve in current arrangement!</div>");
             return;
         }
         if(updateProperty!=null)
         {
             updateProperty.firePropertyChange("numEquations", null, 1);
-        }
-        else
-        {
-            System.err.println("Property change support error");
         }
     }
 
@@ -215,7 +210,7 @@ public class SolveCommand extends Command
         String ans = "";
         while (ans.equals(""))
         {
-            ans = JOptionPane.showInputDialog(promptStr);
+            ans = null;
             if (ans == null)
             {
                 return null;
@@ -238,16 +233,15 @@ public class SolveCommand extends Command
         String whatToAdd = "> ";
         if (ans.replace(" ", "").equals(step))
         {
-            whatToAdd += "<font color=\"green\">" + ans + ", Correct.</font>";
+            whatToAdd += "<div class=\"alert alert-success\">" + ans + ", Correct.</div>";
         }
         else
         {
-            whatToAdd += "<font color=\"red\">" + ans + ", Not quite right.</font>" + (hint? "Hint: be sure to apply the inverse operation to both side." : "") + "Try again." ;
+            whatToAdd += "<div class=\"alert alert-danger\">" + ans + ", Not quite right." + (hint? "Hint: be sure to apply the inverse operation to both side." : "") + "Try again.</div>" ;
         }
         return whatToAdd;
     }
 
-    //TODO refactor to csu.mathapp.CoreManager
     private String output(String step, String decimalAns, MODE currentMode, CoreManager core)
     {
         final int NUM_FOR_HINT = 2;
@@ -264,7 +258,7 @@ public class SolveCommand extends Command
                     String ans = userDialogPrompt();
                     if (ans == null)
                     {
-                        core.appendToBody("Cancelling operation...");
+                        core.appendToBody("<div class=\"alert alert-secondary\"Cancelling operation...</div>");
                         return "return";
                     }
                     correct = isCorrect(ans, step);
@@ -309,21 +303,21 @@ public class SolveCommand extends Command
 
         if (tokens[0] != null && !tokens[0].contains("" + symbol))
         {
-            System.out.println("Unexpected ordering of terms... exiting");
-            JOptionPane.showMessageDialog(null, "There was an error processing the equation, issue: bad ordering.\nThis tool is still in early development. This is an error on the tool's end and you did nothing wrong.", "Parsing Issue", JOptionPane.ERROR_MESSAGE);
+            //System.out.println("Unexpected ordering of terms... exiting");
+            core.appendToBody("There was an error processing the equation, issue: bad ordering.<br>This tool is still in early development. This is an error on the tool's end and you did nothing wrong.");
             return;
         }
         else if (moreThanOneSymbol)
         {
             core.appendToBody("Dealing with more than one symbol not implemented yet.");
-            System.out.println("More than one symbol, other than main symbol detected, not implemented yet, returning");
+            //System.out.println("More than one symbol, other than main symbol detected, not implemented yet, returning");
             return;
         }
 
         if (sameSymbolOnBothSides(tokens, indexOfESign, symbol))
         {
             core.appendToBody("Group " + symbol + " on same side of the equation.");
-            System.out.println("operation not support just yet... exiting.");
+            //System.out.println("operation not support just yet... exiting.");
             return;
         }
 
@@ -366,7 +360,7 @@ public class SolveCommand extends Command
         {
             String coefficient = getCoefficient(tokens[indexOfSymbol]);
 
-            System.out.println("Coefficient: " + coefficient);
+            //System.out.println("Coefficient: " + coefficient);
 
             tokens[indexOfSymbol] = "" + symbol + (hasExp(tokens[indexOfSymbol]) ? ("^" + getExp(tokens[indexOfSymbol])) : "");
             String previousTerm = "";
@@ -401,7 +395,7 @@ public class SolveCommand extends Command
         {
             //todo expand for division e.g. x/2
             core.appendToBody("\tDivide both sides by coeff.");
-            System.out.println("'/' NYI... exiting");
+            //System.out.println("'/' NYI... exiting");
             return;
         }
 
@@ -472,7 +466,7 @@ public class SolveCommand extends Command
     private void solveQuadraticEquation(String[] tokens, char symbol, String type, String sessionId)
     {
         CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
-        System.out.println("In solve quad equ method");
+        //System.out.println("In solve quad equ method");
         if (type.equals("standard"))
         {
             int a;
@@ -495,7 +489,7 @@ public class SolveCommand extends Command
             catch (Exception e)
             {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "An unexpected error has occurred","Unexpected error", JOptionPane.ERROR_MESSAGE);
+                core.appendToBody("An unexpected error has occurred");
                 return;
             }
             core.appendToBody("Using the quadratic formula:<br>x = (-b ± √[b<sup>2</sup> - 4ac</span>])/2a");
@@ -595,14 +589,19 @@ public class SolveCommand extends Command
         {
             tokens[tokensIndex] = memory.toString();
         }
-        System.out.print("Here are the terms, symbols, and operators in the array: ");
+        //System.out.print("Here are the terms, symbols, and operators in the array: ");
 
+        /*
         for (String ele : tokens)
         {
             if (ele != null)
-                System.out.print(ele + ", ");
+            {
+                //System.out.print(ele + ", ");
+            }
         }
-        System.out.println();
+
+         */
+        //System.out.println();
 
         return tokens;
     }
@@ -645,8 +644,7 @@ public class SolveCommand extends Command
         }
         else
         {
-            core.appendToBody("Syntax error; Format error.");
-            JOptionPane.showMessageDialog(null, "Invalid equation entered", "Format Error", JOptionPane.ERROR_MESSAGE);
+            core.appendToBody("<div class=\"alert alert-danger\">Error: Format error.</div>");
         }
     }
 }

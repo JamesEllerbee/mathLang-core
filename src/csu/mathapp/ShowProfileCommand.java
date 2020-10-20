@@ -6,13 +6,13 @@ public class ShowProfileCommand extends Command
     public ShowProfileCommand()
     {
         setName("show profile");
-        setDescription("opens the profile window");
+        setDescription("displays profile information");
     }
 
     @Override
     public void performAction(String param, String sessionId)
     {
-        //MainFormManager.getMainFormManagerInstance().getProfileForm().showProfile();
         //TODO implement action
+        CoreManager.getCoreManagerInstance(sessionId).appendToBody("<div class=\"alert alert-warning\">Warning: The profile functionality has not been added to the web app!</div>");
     }
 }

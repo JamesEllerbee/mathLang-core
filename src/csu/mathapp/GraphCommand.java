@@ -94,6 +94,6 @@ public class GraphCommand extends Command
         //MainFormManager mfm = MainFormManager.getMainFormManagerInstance();
         //spawnPlotter(param);
         //this.updateProperty.firePropertyChange("numGraphs", null, 1);
-        CoreManager.getCoreManagerInstance(sessionId).appendToBody("<em>This is not currently implemented for web!</em>");
+        CoreManager.getCoreManagerInstance(sessionId).appendToBody("<div class=\"alert alert-warning\">Warning: The graph functionality is not currently implemented for web!</div>");
     }
 }
