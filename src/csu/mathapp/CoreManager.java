@@ -1,6 +1,7 @@
 package csu.mathapp;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * State manager for the math lang core project
@@ -10,7 +11,7 @@ import java.util.HashMap;
 
 public class CoreManager
 {
-    final int MAX_NUM_LINE = 20;
+    int MAX_NUM_LINES = 15;
 
     private static HashMap<String, CoreManager> coreManagerInstances;
 
@@ -45,26 +46,21 @@ public class CoreManager
         return currentMode;
     }
 
+    //deprecated
     private String body;
+
+    private List<String> lines;
 
     private String root;
 
     private CoreManager() {
         currentMode = MODE.STEP_BY_STEP;
         body = "";
-
+        lines = new CircularStringList(MAX_NUM_LINES);
         root = "./";
         appendToBody("<strong>Initializing...</strong><br><strong>Current output mode</strong>: "
                 + "<span class=\"text-monospace\">" + currentMode.name().toLowerCase().replace('_', ' ') + "</span>.<br>"
                 + "<div class=\"alert alert-info\">To get start, use command 'help' to see available commands and their descriptions</div>");
-    }
-
-    public void setRoot(String root){
-        this.root = root;
-    }
-
-    public String getRoot() {
-        return this.root;
     }
 
     /**
@@ -81,12 +77,17 @@ public class CoreManager
             }
             else
             {
-                body += whatToAdd + "<br>";
+                lines.add(whatToAdd + "<br>");
             }
         }
     }
 
     public String render() {
-        return body;
+        String[] linesArr = (String[])lines.toArray();
+        StringBuilder sb = new StringBuilder();
+        for(String line : linesArr) {
+            sb.append(line);
+        }
+        return sb.toString();
     }
 }

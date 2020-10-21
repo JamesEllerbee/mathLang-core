@@ -160,7 +160,29 @@ public class GraphCommand extends Command
             CoreManager.getCoreManagerInstance(sessionId).appendToBody("<div class=\"text-center\"><img src=\"./"+f.getName()+"\"></div>");
         }
         else if(param.contains("simple quadratic function")){
-
+            File f = new File("./simple-quadratic-function.png");
+            if(!f.exists()){
+                double[] xData = new double[21];
+                for(int i = 0; i < xData.length; i++){
+                    xData[i] = i-10;
+                }
+                double[] yData = new double[21];
+                for(int i = 0; i <xData.length; i++){
+                    yData[i] = xData[i]*xData[i];
+                }
+                XYChart chart = new XYChart(500, 400);
+                chart.setTitle("simple quadratic function");
+                chart.setXAxisTitle("X");
+                chart.setYAxisTitle("Y");
+                XYSeries series = chart.addSeries("f(x)", xData,yData);
+                series.setMarker(SeriesMarkers.CIRCLE);
+                try{
+                    BitmapEncoder.saveBitmap(chart, f.getName(), BitmapEncoder.BitmapFormat.PNG);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            CoreManager.getCoreManagerInstance(sessionId).appendToBody("<div class=\"text-center\"><img src=\"./"+f.getName()+"\"></div>");
         }
         else if(isFuction(param)){
             //System.out.println("is a function");
