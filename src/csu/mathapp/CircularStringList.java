@@ -8,11 +8,11 @@ import java.util.ListIterator;
 public class CircularStringList implements List<String>
 {
     private String[] list;
-    private int currentPosition;
+    private int head;
 
     public CircularStringList(int size){
         list = new String[size];
-        currentPosition = 0;
+        head = 0;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CircularStringList implements List<String>
     @Override
     public Iterator<String> iterator()
     {
-        return null;
+        return new CircularListIterator(list, head);
     }
 
     @Override
@@ -55,21 +55,21 @@ public class CircularStringList implements List<String>
     @Override
     public boolean add(String s)
     {
-        if(currentPosition==list.length){
-            currentPosition=0;
+        if(head ==list.length){
+            head =0;
         }
-        list[currentPosition++] = s;
+        list[head++] = s;
         return true;
     }
 
     @Override
     public boolean remove(Object o)
     {
-        if(currentPosition==0) {
-            currentPosition = list.length-1;
+        if(head ==0) {
+            head = list.length-1;
         }
         else {
-            currentPosition--;
+            head--;
         }
 
         return false;

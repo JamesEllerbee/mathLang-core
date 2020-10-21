@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -105,10 +106,10 @@ public class CoreManager
     public String render() {
         String[] linesArr = (String[])lines.toArray();
         StringBuilder sb = new StringBuilder();
-        for(String line : linesArr) {
-            if(line != null)
+        for(Iterator<String> i = lines.iterator(); i.hasNext();) {
+            if(i != null)
             {
-                sb.append(line);
+                sb.append(i.next());
             }
 
         }
