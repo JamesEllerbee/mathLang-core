@@ -105,14 +105,29 @@ public class GraphCommand extends Command
         return Pattern.matches("show graph for y\\s?=\\s?(\\d*(\\.\\d+)?x?(\\^\\d*(\\.\\d+)?)?(/\\d?(\\.\\d+)?)?\\s?(\\+|-)?\\s?)",s);
     }
 
+    private void createSimpleGraph(double[] xData, double[] yData, File f, String title){
+        XYChart chart = new XYChart(500, 400);
+        chart.setTitle(title);
+        chart.setXAxisTitle("X");
+        chart.setYAxisTitle("Y");
+        XYSeries series = chart.addSeries("f(x)", xData,yData);
+        series.setMarker(SeriesMarkers.CIRCLE);
+        try{
+            BitmapEncoder.saveBitmap(chart, f.getPath(), BitmapEncoder.BitmapFormat.PNG);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void performAction(String param, String sessionId)
     {
         //TODO implement action
         //spawnPlotter(param);
         CoreManager.getCoreManagerInstance(sessionId).appendToBody("<div class=\"alert alert-warning\">Warning: The graph functionality is in development for web!</div>");
+        String whatToAdd = "";
         if(param.contains("simple constant function")){
-            File f = new File("./simple-constant-function.png");
+            File f = new File(CoreManager.getCoreManagerInstance(sessionId).getRoot() + "/simple-constant-function.png");
             if(!f.exists()){
                 double[] xData = new double[21];
                 for(int i = 0; i < xData.length; i++){
@@ -120,22 +135,13 @@ public class GraphCommand extends Command
                 }
                 double[] yData = new double[21];
                 Arrays.fill(yData, 1);
-                XYChart chart = new XYChart(500, 400);
-                chart.setTitle("simple constant function");
-                chart.setXAxisTitle("X");
-                chart.setYAxisTitle("Y");
-                XYSeries series = chart.addSeries("f(x)", xData,yData);
-                series.setMarker(SeriesMarkers.CIRCLE);
-                try{
-                    BitmapEncoder.saveBitmap(chart, f.getName(), BitmapEncoder.BitmapFormat.PNG);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                createSimpleGraph(xData, yData, f, "simple constant function");
             }
-            CoreManager.getCoreManagerInstance(sessionId).appendToBody("<div class=\"text-center\"><img src=\"./"+f.getName()+"\"></div>");
+            whatToAdd = "<div class=\"text-center\"><img src=\""+f.getName()+"\"></div>";
         }
         else if(param.contains("simple linear function")){
-            File f = new File("./simple-linear-function.png");
+            File f = new File(CoreManager.getCoreManagerInstance(sessionId).getRoot() + "/simple-linear-function.png");
+
             if(!f.exists()){
                 double[] xData = new double[21];
                 for(int i = 0; i < xData.length; i++){
@@ -145,22 +151,12 @@ public class GraphCommand extends Command
                 for(int i = 0; i <xData.length; i++){
                     yData[i] = xData[i];
                 }
-                XYChart chart = new XYChart(500, 400);
-                chart.setTitle("simple linear function");
-                chart.setXAxisTitle("X");
-                chart.setYAxisTitle("Y");
-                XYSeries series = chart.addSeries("f(x)", xData,yData);
-                series.setMarker(SeriesMarkers.CIRCLE);
-                try{
-                    BitmapEncoder.saveBitmap(chart, f.getName(), BitmapEncoder.BitmapFormat.PNG);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                createSimpleGraph(xData,yData,f,"simple linear function");
             }
-            CoreManager.getCoreManagerInstance(sessionId).appendToBody("<div class=\"text-center\"><img src=\"./"+f.getName()+"\"></div>");
+            whatToAdd = "<div class=\"text-center\"><img src=\""+f.getName()+"\"></div>";
         }
         else if(param.contains("simple quadratic function")){
-            File f = new File("./simple-quadratic-function.png");
+            File f = new File(CoreManager.getCoreManagerInstance(sessionId).getRoot() + "/simple-quadratic-function.png");
             if(!f.exists()){
                 double[] xData = new double[21];
                 for(int i = 0; i < xData.length; i++){
@@ -170,19 +166,9 @@ public class GraphCommand extends Command
                 for(int i = 0; i <xData.length; i++){
                     yData[i] = xData[i]*xData[i];
                 }
-                XYChart chart = new XYChart(500, 400);
-                chart.setTitle("simple quadratic function");
-                chart.setXAxisTitle("X");
-                chart.setYAxisTitle("Y");
-                XYSeries series = chart.addSeries("f(x)", xData,yData);
-                series.setMarker(SeriesMarkers.CIRCLE);
-                try{
-                    BitmapEncoder.saveBitmap(chart, f.getName(), BitmapEncoder.BitmapFormat.PNG);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                createSimpleGraph(xData,yData,f,"simple quadratic function");
             }
-            CoreManager.getCoreManagerInstance(sessionId).appendToBody("<div class=\"text-center\"><img src=\"./"+f.getName()+"\"></div>");
+            whatToAdd = "<div class=\"text-center\"><img src=\""+f.getName()+"\"></div>";
         }
         else if(isFuction(param)){
             //System.out.println("is a function");
@@ -190,8 +176,8 @@ public class GraphCommand extends Command
         }
         else {
             //System.out.println("is not a function");
-            CoreManager.getCoreManagerInstance(sessionId).appendToBody("<div class=\"alert alert-danger\">Error: Did not recognise function, please try again.</div>");
+            whatToAdd = "<div class=\"alert alert-danger\">Error: Did not recognise function, please try again.</div>";
         }
-
+        CoreManager.getCoreManagerInstance(sessionId).appendToBody(whatToAdd);
     }
 }

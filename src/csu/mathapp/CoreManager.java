@@ -57,7 +57,9 @@ public class CoreManager
 
     private String root;
 
-
+    public String getRoot() {
+        return root;
+    }
 
     private CoreManager() {
         currentMode = MODE.STEP_BY_STEP;
@@ -90,7 +92,8 @@ public class CoreManager
         {
             if (whatToAdd.equals(""))
             {
-                body = "Done.<br>";
+                lines.removeAll(null);
+                lines.add("Done.<br>");
             }
             else
             {
