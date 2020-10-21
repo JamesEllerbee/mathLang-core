@@ -11,6 +11,7 @@ public class CommandDirectory
             new SolveCommand(), new GraphCommand(),
             new ClearCommand(),
             //new QuitCommand(),
+            new EverythingCommand()
     };
 
     private static Command findCommand(String target)
