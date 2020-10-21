@@ -152,7 +152,7 @@ public class SimplifyCommand extends Command
         }
         else
         {
-            core.appendToBody("<div class=\"alert alert-primary\">Expression not recognized or not currently support</div>");
+            core.appendToBody("<div class=\"alert alert-danger\">Expression not recognized or not currently supported</div>");
         }
     }
 }

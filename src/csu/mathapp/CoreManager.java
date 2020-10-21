@@ -1,6 +1,11 @@
 package csu.mathapp;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * State manager for the math lang core project
@@ -10,7 +15,7 @@ import java.util.HashMap;
 
 public class CoreManager
 {
-    final int MAX_NUM_LINE = 20;
+    int MAX_NUM_LINES = 16;
 
     private static HashMap<String, CoreManager> coreManagerInstances;
 
@@ -45,13 +50,36 @@ public class CoreManager
         return currentMode;
     }
 
+    //deprecated
     private String body;
 
-    public CoreManager() {
+    private List<String> lines;
+
+    private String root;
+
+    public String getRoot() {
+        return root;
+    }
+
+    private CoreManager() {
         currentMode = MODE.STEP_BY_STEP;
         body = "";
+        lines = new CircularStringList(MAX_NUM_LINES);
+        File f = new File("./.mathappconf");
+        if(f.exists()) {
+            try {
+                BufferedReader fw = new BufferedReader(new FileReader(f));
+                root = fw.readLine().replace("\n","");
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        } else
+        {
+            root = "./";
+        }
         appendToBody("<strong>Initializing...</strong><br><strong>Current output mode</strong>: "
-                + "<i>" + currentMode.name().toLowerCase().replace('_', ' ') + "</i>.");
+                + "<span class=\"text-monospace\">" + currentMode.name().toLowerCase().replace('_', ' ') + "</span>.<br>"
+                + "<div class=\"alert alert-info\">To get start, use command 'help' to see available commands and their descriptions</div>");
     }
 
     /**
@@ -64,16 +92,22 @@ public class CoreManager
         {
             if (whatToAdd.equals(""))
             {
-                body = "Done.<br>";
+                lines.removeAll(null);
+                lines.add("Done.<br>");
             }
             else
             {
-                body += whatToAdd + "<br>";
+                lines.add(whatToAdd + "<br>");
             }
         }
     }
 
     public String render() {
-        return body;
+        String[] linesArr = (String[])lines.toArray();
+        StringBuilder sb = new StringBuilder();
+        for(Iterator<String> i = lines.iterator(); i.hasNext();) {
+                sb.append(i.next());
+        }
+        return sb.toString();
     }
 }
