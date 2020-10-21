@@ -42,7 +42,6 @@ public class CircularStringList implements List<String>
     @Override
     public Object[] toArray()
     {
-
         return list;
     }
 

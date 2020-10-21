@@ -107,11 +107,7 @@ public class CoreManager
         String[] linesArr = (String[])lines.toArray();
         StringBuilder sb = new StringBuilder();
         for(Iterator<String> i = lines.iterator(); i.hasNext();) {
-            if(i != null)
-            {
                 sb.append(i.next());
-            }
-
         }
         return sb.toString();
     }
