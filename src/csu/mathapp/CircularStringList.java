@@ -24,7 +24,13 @@ public class CircularStringList implements List<String>
     @Override
     public boolean isEmpty()
     {
-        return list.length==0;
+        int count = 0;
+        for(String s : list){
+            if(s==null){
+                count++;
+            }
+        }
+        return count==list.length;
     }
 
     @Override
@@ -36,6 +42,9 @@ public class CircularStringList implements List<String>
     @Override
     public Iterator<String> iterator()
     {
+        if(isEmpty()){
+            return null;
+        }
         return new CircularListIterator(list, head);
     }
 
@@ -54,10 +63,12 @@ public class CircularStringList implements List<String>
     @Override
     public boolean add(String s)
     {
+
+        list[head++] = s;
         if(head ==list.length){
             head =0;
         }
-        list[head++] = s;
+        list[head] = null;
         return true;
     }
 

@@ -55,6 +55,7 @@ public class Driver
         //dev code
         CoreManager cm = CoreManager.getCoreManagerInstance(sessionId);
         Command cmd;
+
         for (String commandStr : commandsToRun)
         {
             cm.appendToBody("> " + commandStr);
@@ -63,6 +64,7 @@ public class Driver
                 cmd.performAction(commandStr, sessionId);
             }
         }
+
         String toRender = head + String.format(body, cm.render());
         try {
             File f = new File("./sample.html");

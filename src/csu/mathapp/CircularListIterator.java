@@ -11,25 +11,33 @@ public class CircularListIterator implements Iterator<String>
     public CircularListIterator(String[] list, int head) {
         this.list = list;
         this.head = head;
-        if(head==0) {
-            curPos = list.length-1;
-        } else {
-            curPos = head - 1;
+        curPos=findStartingIndex(head);
+    }
+
+    private int findStartingIndex(int a) {
+        a++;
+        while(list[a]==null){
+            a++;
+            if(a==list.length){
+                a=0;
+            }
         }
+        return a;
     }
 
     @Override
     public boolean hasNext()
     {
-        if(curPos<0){
-            curPos = list.length - 1;
+        if(curPos==list.length){
+            curPos=0;
         }
-        return curPos!=head&&list[curPos]!=null;
+        return list[curPos]!=null;
     }
 
     @Override
     public String next()
     {
-        return list[curPos--];
+
+        return list[curPos++];
     }
 }

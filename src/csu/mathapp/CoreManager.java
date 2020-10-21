@@ -1,7 +1,6 @@
 package csu.mathapp;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
@@ -16,7 +15,7 @@ import java.util.List;
 
 public class CoreManager
 {
-    int MAX_NUM_LINES = 15;
+    int MAX_NUM_LINES = 16;
 
     private static HashMap<String, CoreManager> coreManagerInstances;
 
