@@ -18,7 +18,8 @@ public class GraphCommand extends Command
     public GraphCommand()
     {
         super.setName("show graph for");
-        super.setDescription("Performs the graphing action, currently supported functions: linear, quadratic. Usage: show graph for [function], [ domain: [start, end] ]. e.g. show graph for y = x, [-10,10]");
+        super.setDescription("Performs the graphing action, currently supported functions: constant, linear, quadratic. Usage: show graph for [function], [ domain: [start, end] ]. e.g. show graph for y = x, [-10,10]. Try using 'show graph for simple (constant|linear|quadratic) function'");
+
         super.updateProperty = new PropertyChangeSupport(this);
     }
 
