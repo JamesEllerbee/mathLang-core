@@ -1,5 +1,9 @@
 package csu.mathapp;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,11 +57,24 @@ public class CoreManager
 
     private String root;
 
+
+
     private CoreManager() {
         currentMode = MODE.STEP_BY_STEP;
         body = "";
         lines = new CircularStringList(MAX_NUM_LINES);
-        root = "./";
+        File f = new File("./.mathappconf");
+        if(f.exists()) {
+            try {
+                BufferedReader fw = new BufferedReader(new FileReader(f));
+                root = fw.readLine().replace("\n","");
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        } else
+        {
+            root = "./";
+        }
         appendToBody("<strong>Initializing...</strong><br><strong>Current output mode</strong>: "
                 + "<span class=\"text-monospace\">" + currentMode.name().toLowerCase().replace('_', ' ') + "</span>.<br>"
                 + "<div class=\"alert alert-info\">To get start, use command 'help' to see available commands and their descriptions</div>");
@@ -86,7 +103,11 @@ public class CoreManager
         String[] linesArr = (String[])lines.toArray();
         StringBuilder sb = new StringBuilder();
         for(String line : linesArr) {
-            sb.append(line);
+            if(line != null)
+            {
+                sb.append(line);
+            }
+
         }
         return sb.toString();
     }
