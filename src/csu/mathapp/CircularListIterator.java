@@ -15,7 +15,11 @@ public class CircularListIterator implements Iterator<String>
     }
 
     private int findStartingIndex(int a) {
-        a++;
+        if(a+1==list.length){
+            a=0;
+        } else {
+            a++;
+        }
         while(list[a]==null){
             a++;
             if(a==list.length){
