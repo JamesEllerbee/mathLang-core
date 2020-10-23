@@ -20,7 +20,7 @@ public class CoreManager
     private static HashMap<String, CoreManager> coreManagerInstances;
 
     /**
-     * Returns the CoreManager that coresponds to the sessionId
+     * Returns the CoreManager that is maped with the sessionId
      * @param sessionId
      * @return the current or new CoreManager
      */

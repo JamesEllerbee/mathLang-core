@@ -123,8 +123,7 @@ public class GraphCommand extends Command
     @Override
     public void performAction(String param, String sessionId)
     {
-        //TODO implement action
-        //spawnPlotter(param);
+
         CoreManager.getCoreManagerInstance(sessionId).appendToBody("<div class=\"alert alert-warning\">Warning: The graph functionality is in development for web!</div>");
         String whatToAdd = "";
         if(param.contains("simple constant function")){
@@ -172,13 +171,15 @@ public class GraphCommand extends Command
             whatToAdd = "<div class=\"text-center\"><img src=\""+f.getName()+"\"></div>";
         }
         else if(isFuction(param)){
-            //System.out.println("is a function");
-            this.updateProperty.firePropertyChange("numGraphs", null, 1);
+            //TODO parse user defined function, create xData and yData and uses createSimpleGraph to render the graph
+            double[] xData;
+            double[] yData;
         }
         else {
             //System.out.println("is not a function");
             whatToAdd = "<div class=\"alert alert-danger\">Error: Did not recognise function, please try again.</div>";
         }
+        //this.updateProperty.firePropertyChange("numGraphs", null, 1);
         CoreManager.getCoreManagerInstance(sessionId).appendToBody(whatToAdd);
     }
 }
