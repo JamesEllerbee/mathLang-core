@@ -43,7 +43,6 @@ public class CommandDirectory
         {
             return cmd;
         }
-        //System.err.println("No command for input " + command);
         CoreManager.getCoreManagerInstance(sesssionId).appendToBody("<div class=\"alert alert-danger\">Error: No such command!</div>");
         return null;
     }

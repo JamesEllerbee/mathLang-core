@@ -244,10 +244,6 @@ public class SolveCommand extends Command
 
     private String output(String step, String decimalAns, MODE currentMode, CoreManager core)
     {
-        final int NUM_FOR_HINT = 2;
-        int numTries = 3;
-        int curNumTries = 0;
-        boolean correct = false;
         if (!step.equals("") && currentMode != MODE.OUTPUT)
         {
             if (core.getCurrentMode() == MODE.INTERACTIVE)

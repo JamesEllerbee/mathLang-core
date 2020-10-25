@@ -63,7 +63,13 @@ public class CoreManager
     }
 
     public void checkStep(String input) {
-
+        //TODO finish this implementation
+        if(input.equals(expectedInputs.get(0))){
+            appendToBody("yes");
+            expectedInputs.remove(0);
+        } else {
+            appendToBody("no");
+        }
     }
 
     private String root;
