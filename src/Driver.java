@@ -46,8 +46,8 @@ public class Driver
             "simplify x+y+z",
             "simplify (x+1)(x-1)",
             "solve for garbagetext",
+            "change mode interactive",
             "solve for x, x-1=2",
-            "invalid command input",
     };
 
     public static void main(String[] args)

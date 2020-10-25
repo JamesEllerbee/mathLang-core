@@ -10,7 +10,6 @@ public class CommandDirectory
             new SimplifyCommand(),
             new SolveCommand(), new GraphCommand(),
             new ClearCommand(),
-            //new QuitCommand(),
             new EverythingCommand()
     };
 
