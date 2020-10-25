@@ -10,6 +10,7 @@ import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.util.Arrays;
 import java.util.regex.Pattern;
+import java.util.Scanner;
 
 public class GraphCommand extends Command
 {
@@ -174,6 +175,20 @@ public class GraphCommand extends Command
             //TODO parse user defined function, create xData and yData and uses createSimpleGraph to render the graph
             double[] xData;
             double[] yData;
+            int xLowLimit;
+            int xHighLimit;
+
+            String[] splitParam = param.split(",", 2);
+            Scanner domainScanner = new Scanner(splitParam[1]);
+            domainScanner.useDelimiter(",");
+            xLowLimit = domainScanner.nextInt();
+            xHighLimit = domainScanner.nextInt();
+
+            int xRange = (xHighLimit - xLowLimit);
+            xData = new double[xRange];
+            for(int i = 0; i < xRange; i++) {
+                xData[i] = (xLowLimit + i);
+            }
         }
         else {
             //System.out.println("is not a function");
