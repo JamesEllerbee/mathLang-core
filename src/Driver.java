@@ -41,6 +41,8 @@ public class Driver
             "show graph for simple constant function",
             "show graph for simple linear function",
             "show graph for simple quadratic function",
+            "show graph for y = x, [-10, 10]",
+            "show graph for y = x, [10, 30]",
             "show profile",
             "simplify garbagetext",
             "simplify x+y+z",

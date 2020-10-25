@@ -104,7 +104,7 @@ public class GraphCommand extends Command
     }
 
     private boolean isFuction(String s) {
-        return Pattern.matches("show graph for y\\s?=\\s?(\\d*(\\.\\d+)?x?(\\^\\d*(\\.\\d+)?)?(/\\d?(\\.\\d+)?)?\\s?(\\+|-)?\\s?)",s);
+        return Pattern.matches("show graph for y\\s?=\\s?(\\d*(\\.\\d+)?x?(\\^\\d*(\\.\\d+)?)?(/\\d?(\\.\\d+)?)?\\s?(\\+|-)?\\s?),\\s?\\[-?\\d*,\\s?-?\\d*]",s);
     }
 
     private void createSimpleGraph(double[] xData, double[] yData, File f, String title){
@@ -121,20 +121,38 @@ public class GraphCommand extends Command
         }
     }
 
+    private double[] createXData(String inputStr) {
+        int xLowLimit;
+        int xHighLimit;
+        String domainStr;
+        if(Pattern.matches("\\[-?\\d*,\\s?-?\\d*]", inputStr)){
+            domainStr = inputStr;
+        } else {
+            String[] splitParam = inputStr.split(",", 2);
+            domainStr = splitParam[1].replace("[", "").replace(",", "").replace("]", "");
+        }
+        Scanner domainScanner = new Scanner(domainStr);
+        xLowLimit = domainScanner.nextInt();
+        xHighLimit = domainScanner.nextInt();
+
+        int xRange = (xHighLimit - xLowLimit) + 1;
+        double[] xData = new double[xRange];
+        for(int i = 0; i < xRange; i++) {
+            xData[i] = xLowLimit + i;
+        }
+        return xData;
+    }
+
     @Override
     public void performAction(String param, String sessionId)
     {
-
         CoreManager.getCoreManagerInstance(sessionId).appendToBody("<div class=\"alert alert-warning\">Warning: The graph functionality is in development for web!</div>");
         String whatToAdd = "";
         if(param.contains("simple constant function")){
             File f = new File(CoreManager.getCoreManagerInstance(sessionId).getRoot() + "/simple-constant-function.png");
             if(!f.exists()){
-                double[] xData = new double[21];
-                for(int i = 0; i < xData.length; i++){
-                    xData[i] = i-10;
-                }
-                double[] yData = new double[21];
+                double[] xData = createXData(DEFAULT_DOMAIN);
+                double[] yData = new double[xData.length];
                 Arrays.fill(yData, 1);
                 createSimpleGraph(xData, yData, f, "simple constant function");
             }
@@ -144,14 +162,9 @@ public class GraphCommand extends Command
             File f = new File(CoreManager.getCoreManagerInstance(sessionId).getRoot() + "/simple-linear-function.png");
 
             if(!f.exists()){
-                double[] xData = new double[21];
-                for(int i = 0; i < xData.length; i++){
-                    xData[i] = i-10;
-                }
-                double[] yData = new double[21];
-                for(int i = 0; i <xData.length; i++){
-                    yData[i] = xData[i];
-                }
+                double[] xData = createXData(DEFAULT_DOMAIN);
+                double[] yData = new double[xData.length];
+                System.arraycopy(xData, 0, yData, 0, xData.length);
                 createSimpleGraph(xData,yData,f,"simple linear function");
             }
             whatToAdd = "<div class=\"text-center\"><img src=\""+f.getName()+"\"></div>";
@@ -159,11 +172,8 @@ public class GraphCommand extends Command
         else if(param.contains("simple quadratic function")){
             File f = new File(CoreManager.getCoreManagerInstance(sessionId).getRoot() + "/simple-quadratic-function.png");
             if(!f.exists()){
-                double[] xData = new double[21];
-                for(int i = 0; i < xData.length; i++){
-                    xData[i] = i-10;
-                }
-                double[] yData = new double[21];
+                double[] xData = createXData(DEFAULT_DOMAIN);
+                double[] yData = new double[xData.length];
                 for(int i = 0; i <xData.length; i++){
                     yData[i] = xData[i]*xData[i];
                 }
@@ -172,26 +182,11 @@ public class GraphCommand extends Command
             whatToAdd = "<div class=\"text-center\"><img src=\""+f.getName()+"\"></div>";
         }
         else if(isFuction(param)){
+            double[] xData = createXData(param);
             //TODO parse user defined function, create xData and yData and uses createSimpleGraph to render the graph
-            double[] xData;
             double[] yData;
-            int xLowLimit;
-            int xHighLimit;
-
-            String[] splitParam = param.split(",", 2);
-            Scanner domainScanner = new Scanner(splitParam[1]);
-            domainScanner.useDelimiter(",");
-            xLowLimit = domainScanner.nextInt();
-            xHighLimit = domainScanner.nextInt();
-
-            int xRange = (xHighLimit - xLowLimit);
-            xData = new double[xRange];
-            for(int i = 0; i < xRange; i++) {
-                xData[i] = (xLowLimit + i);
-            }
         }
         else {
-            //System.out.println("is not a function");
             whatToAdd = "<div class=\"alert alert-danger\">Error: Did not recognise function, please try again.</div>";
         }
         //this.updateProperty.firePropertyChange("numGraphs", null, 1);
