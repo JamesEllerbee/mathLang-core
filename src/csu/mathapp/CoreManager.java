@@ -3,6 +3,7 @@ package csu.mathapp;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -55,16 +56,26 @@ public class CoreManager
 
     private List<String> lines;
 
+    private List<String> expectedInputs;
+
+    public List<String> getExpectedInputs() {
+        return expectedInputs;
+    }
+
     private String root;
 
     public String getRoot() {
         return root;
     }
 
+    /**
+     * Constructor for class
+     */
     private CoreManager() {
         currentMode = MODE.STEP_BY_STEP;
         body = "";
         lines = new CircularStringList(MAX_NUM_LINES);
+        expectedInputs = new ArrayList<>();
         File f = new File("./.mathappconf");
         if(f.exists()) {
             try {
@@ -87,7 +98,6 @@ public class CoreManager
      * @param whatToAdd, the string containing new content
      */
     public void appendToBody(String whatToAdd) {
-        //TODO implement content limiter, split body regex=<br> if length > MAX_NUM_LINES, ignore the first n lines of the body
         if (whatToAdd != null)
         {
             if (whatToAdd.equals(""))

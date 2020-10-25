@@ -252,20 +252,7 @@ public class SolveCommand extends Command
         {
             if (core.getCurrentMode() == MODE.INTERACTIVE)
             {
-                while(curNumTries < numTries && !correct)
-                {
-                    //core.renderBody();
-                    String ans = userDialogPrompt();
-                    if (ans == null)
-                    {
-                        core.appendToBody("<div class=\"alert alert-secondary\"Cancelling operation...</div>");
-                        return "return";
-                    }
-                    correct = isCorrect(ans, step);
-                    core.appendToBody(interactiveOutputString(ans, step,curNumTries>=NUM_FOR_HINT));
-                    curNumTries++;
-                }
-                //core.renderBody();
+                core.getExpectedInputs().add(step);
             }
             else
             {
@@ -303,14 +290,12 @@ public class SolveCommand extends Command
 
         if (tokens[0] != null && !tokens[0].contains("" + symbol))
         {
-            //System.out.println("Unexpected ordering of terms... exiting");
             core.appendToBody("There was an error processing the equation, issue: bad ordering.<br>This tool is still in early development. This is an error on the tool's end and you did nothing wrong.");
             return;
         }
         else if (moreThanOneSymbol)
         {
             core.appendToBody("Dealing with more than one symbol not implemented yet.");
-            //System.out.println("More than one symbol, other than main symbol detected, not implemented yet, returning");
             return;
         }
 
@@ -360,8 +345,6 @@ public class SolveCommand extends Command
         {
             String coefficient = getCoefficient(tokens[indexOfSymbol]);
 
-            //System.out.println("Coefficient: " + coefficient);
-
             tokens[indexOfSymbol] = "" + symbol + (hasExp(tokens[indexOfSymbol]) ? ("^" + getExp(tokens[indexOfSymbol])) : "");
             String previousTerm = "";
             if (Integer.parseInt(tokens[indexOfESign + 1]) % Integer.parseInt(coefficient) == 0)
@@ -395,7 +378,6 @@ public class SolveCommand extends Command
         {
             //todo expand for division e.g. x/2
             core.appendToBody("\tDivide both sides by coeff.");
-            //System.out.println("'/' NYI... exiting");
             return;
         }
 
@@ -589,19 +571,6 @@ public class SolveCommand extends Command
         {
             tokens[tokensIndex] = memory.toString();
         }
-        //System.out.print("Here are the terms, symbols, and operators in the array: ");
-
-        /*
-        for (String ele : tokens)
-        {
-            if (ele != null)
-            {
-                //System.out.print(ele + ", ");
-            }
-        }
-
-         */
-        //System.out.println();
 
         return tokens;
     }
