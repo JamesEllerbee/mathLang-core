@@ -143,6 +143,11 @@ public class GraphCommand extends Command
         return xData;
     }
 
+    private double[] createYData(String inputStr) {
+        //TODO implement this
+        return null;
+    }
+
     @Override
     public void performAction(String param, String sessionId)
     {

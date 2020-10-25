@@ -62,6 +62,10 @@ public class CoreManager
         return expectedInputs;
     }
 
+    public void checkStep(String input) {
+
+    }
+
     private String root;
 
     public String getRoot() {
@@ -113,7 +117,6 @@ public class CoreManager
     }
 
     public String render() {
-        String[] linesArr = (String[])lines.toArray();
         StringBuilder sb = new StringBuilder();
         for(Iterator<String> i = lines.iterator(); i.hasNext();) {
                 sb.append(i.next());

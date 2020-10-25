@@ -1,6 +1,7 @@
 import csu.mathapp.Command;
 import csu.mathapp.CommandDirectory;
 import csu.mathapp.CoreManager;
+import csu.mathapp.MODE;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -60,10 +61,17 @@ public class Driver
 
         for (String commandStr : commandsToRun)
         {
-            cm.appendToBody("> " + commandStr);
+
             cmd = CommandDirectory.getCommand(commandStr, sessionId);
             if(cmd!=null){
-                cmd.performAction(commandStr, sessionId);
+                if(cm.getCurrentMode() == MODE.INTERACTIVE) {
+
+                    cm.checkStep(commandStr);
+                } else {
+                    cm.appendToBody("> " + commandStr);
+                    cmd.performAction(commandStr, sessionId);
+                }
+
             }
         }
 
