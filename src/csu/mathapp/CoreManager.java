@@ -16,7 +16,7 @@ import java.util.List;
 
 public class CoreManager
 {
-    int MAX_NUM_LINES = 16;
+    int maxNumLines;
 
     private static HashMap<String, CoreManager> coreManagerInstances;
 
@@ -27,7 +27,7 @@ public class CoreManager
      */
     public static CoreManager getCoreManagerInstance(String sessionId) {
         if(coreManagerInstances == null) {
-            coreManagerInstances = new HashMap<String, CoreManager>();
+            coreManagerInstances = new HashMap<>();
         }
 
         if(sessionId != null) {
@@ -50,9 +50,6 @@ public class CoreManager
     public MODE getCurrentMode() {
         return currentMode;
     }
-
-    //deprecated
-    private String body;
 
     private List<String> lines;
 
@@ -83,8 +80,7 @@ public class CoreManager
      */
     private CoreManager() {
         currentMode = MODE.STEP_BY_STEP;
-        body = "";
-        lines = new CircularStringList(MAX_NUM_LINES);
+        lines = new CircularStringList(99);
         expectedInputs = new ArrayList<>();
         File f = new File("./.mathappconf");
         if(f.exists()) {
@@ -99,8 +95,9 @@ public class CoreManager
             root = "./";
         }
         appendToBody("<strong>Initializing...</strong><br><strong>Current output mode</strong>: "
-                + "<span class=\"text-monospace\">" + currentMode.name().toLowerCase().replace('_', ' ') + "</span>.<br>"
-                + "<div class=\"alert alert-info\">To get start, use command 'help' to see available commands and their descriptions</div>");
+                + "<span class=\"text-monospace\">" + currentMode.name().toLowerCase().replace('_', ' ') + "</span>.");
+
+        appendToBody(ALERT_TYPE.INFORMATION,"To get start, use command 'help' to see available commands and their descriptions");
     }
 
     /**
@@ -119,6 +116,25 @@ public class CoreManager
             {
                 lines.add(whatToAdd + "<br>");
             }
+        }
+    }
+
+    public void appendToBody(ALERT_TYPE alertType, String whatToAdd) {
+        if(whatToAdd != null) {
+            String alertTag = "%s";
+            switch (alertType){
+                case INFORMATION:
+                    alertTag = "<div class=\"alert alert-info\">%s</div>";
+                    break;
+                case WARNING:
+                    alertTag = "<div class=\"alert alert-warning\">%s</div>";
+                    break;
+                case ERROR:
+                    alertTag = "<div class=\"alert alert-danger\">%s</div>";
+                    break;
+
+            }
+            lines.add(String.format(alertTag,whatToAdd));
         }
     }
 

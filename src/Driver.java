@@ -4,7 +4,6 @@ import csu.mathapp.CoreManager;
 import csu.mathapp.MODE;
 
 import java.io.*;
-import java.util.Scanner;
 
 public class Driver
 {
@@ -88,7 +87,7 @@ public class Driver
         {
             if(cm.getCurrentMode() == MODE.INTERACTIVE && cm.getExpectedInputs().size() > 0)
             {
-                cm.appendToBody("[INTERACTIVE]> " + commandStr);
+                cm.appendToBody("<img src=\"./assets/img/pencil-square.svg\" alt=\"\" width=\"32\" height=\"32\" title=\"Your Input\">> " + commandStr);
                 cm.checkStep(commandStr);
             } else {
                 cm.appendToBody("> " + commandStr);

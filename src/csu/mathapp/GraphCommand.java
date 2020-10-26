@@ -1,6 +1,5 @@
 package csu.mathapp;
 
-import com.sun.deploy.panel.ExceptionListDialog;
 import org.knowm.xchart.BitmapEncoder;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYSeries;
@@ -126,7 +125,7 @@ public class GraphCommand extends Command
         int xHighLimit;
         String domainStr;
         if(Pattern.matches("\\[-?\\d*,\\s?-?\\d*]", inputStr)){
-            domainStr = inputStr;
+            domainStr = inputStr.replace("[", "").replace(",", " ").replace("]", "");
         } else {
             String[] splitParam = inputStr.split(",", 2);
             domainStr = splitParam[1].replace("[", "").replace(",", "").replace("]", "");

@@ -43,7 +43,7 @@ public class CommandDirectory
         {
             return cmd;
         }
-        CoreManager.getCoreManagerInstance(sesssionId).appendToBody("<div class=\"alert alert-danger\">Error: No such command!</div>");
+        CoreManager.getCoreManagerInstance(sesssionId).appendToBody(ALERT_TYPE.ERROR, "No such command!");
         return null;
     }
 
