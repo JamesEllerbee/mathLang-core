@@ -80,7 +80,7 @@ public class CoreManager
      */
     private CoreManager() {
         currentMode = MODE.STEP_BY_STEP;
-        lines = new CircularStringList(99);
+        lines = new CircularStringList(16);
         expectedInputs = new ArrayList<>();
         File f = new File("./.mathappconf");
         if(f.exists()) {

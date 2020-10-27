@@ -144,6 +144,7 @@ public class GraphCommand extends Command
 
     private double[] createYData(double[] xData, String inputStr) {
         //TODO implement this
+        
         return null;
     }
 
