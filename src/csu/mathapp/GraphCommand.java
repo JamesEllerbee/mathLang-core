@@ -18,92 +18,13 @@ public class GraphCommand extends Command
     public GraphCommand()
     {
         super.setName("show graph for");
-        super.setDescription("Performs the graphing action, currently supported functions: constant, linear, quadratic. Usage: show graph for [function], [ domain: [start, end] ]. e.g. show graph for y = x, [-10,10]. Try using 'show graph for simple (constant|linear|quadratic) function'");
+        super.setDescription("Performs the graphing action and outputs and image of the graph. This command currently only support one x variable. Usage: show graph for [function], [ domain: [start, end] ]. e.g. show graph for y = x, [-10,10]. Try using 'show graph for simple (constant|linear|quadratic) function'. We are currently working on improving this command, for now please enter all terms in descending order with constants after the x variable");
 
         super.updateProperty = new PropertyChangeSupport(this);
     }
 
-    private boolean isDigit(String inQuestion)
-    {
-        if (inQuestion == null)
-        {
-            return false;
-        }
-        try
-        {
-            Integer.parseInt(inQuestion);
-        }
-        catch (NumberFormatException e)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    private String getNumericPart(String input, int start)
-    {
-        boolean validChar = true;
-        int i = start;
-        String str = "";
-        while (validChar && i < input.length())
-        {
-            if (isDigit("" + input.charAt(i)))
-            {
-                str += input.charAt(i);
-            }
-            else
-            {
-                validChar = false;
-            }
-            i++;
-        }
-        return str;
-    }
-
-    private String getNumericPart(String input, int start, int end)
-    {
-        String integerStr = "";
-        char curChar;
-
-        for (int i = start; i < end; i++)
-        {
-            curChar = input.charAt(i);
-            if (curChar == '-')
-            {
-                integerStr += curChar;
-            }
-            else if (isDigit("" + curChar))
-            {
-                integerStr += curChar;
-            }
-        }
-        return integerStr;
-    }
-
-    private String parseFunction(String inputStr)
-    {
-        if(inputStr.equals("")){
-            return "";
-        }
-        int indexFunctionStart = inputStr.indexOf('y');
-
-        int indexFunctionEnd = inputStr.indexOf(',');
-        if(indexFunctionEnd == -1)
-        {
-            indexFunctionEnd = inputStr.length();
-        }
-
-        String funcStr = "";
-
-        for (int i = indexFunctionStart; i < indexFunctionEnd; i++)
-        {
-            funcStr += inputStr.charAt(i);
-        }
-        return funcStr;
-    }
-
     private boolean isFuction(String s) {
-        return Pattern.matches("show graph for y\\s?=\\s?(\\d*(\\.\\d+)?x?(\\^\\d*(\\.\\d+)?)?(/\\d?(\\.\\d+)?)?\\s?(\\+|-)?\\s?),\\s?\\[-?\\d*,\\s?-?\\d*]",s);
+        return Pattern.matches("show graph for y\\s?=\\s?\\d*(\\.\\d+)?x?(\\^\\d*(\\.\\d+)?)?(/\\d?(\\.\\d+)?)?\\s?((\\+|-)\\s?\\d+)?\\s?,\\s?\\[-?\\d*,\\s?-?\\d*]",s);
     }
 
     private void createSimpleGraph(double[] xData, double[] yData, File f, String title){
@@ -142,10 +63,64 @@ public class GraphCommand extends Command
         return xData;
     }
 
-    private double[] createYData(double[] xData, String inputStr) {
-        //TODO implement this
-        
-        return null;
+    private double[] createYData(double[] xData, String functionPart) {
+        boolean hasX = functionPart.contains("x");
+        boolean hasExp = functionPart.contains("^");
+        boolean hasRatio = functionPart.contains("/");
+        boolean hasCoefficient = hasX && Pattern.matches("y\\s?=\\s?\\d+x.*", functionPart);
+        boolean hasConstant = Pattern.matches("y\\s?=\\s?\\d*x(\\^\\d+)?(/\\d+)?\\s?(\\+|-)\\s?\\d+", functionPart);
+
+        double coefficient = 1;
+        if(hasCoefficient){
+            coefficient = Double.parseDouble(functionPart.substring(functionPart.indexOf("="), functionPart.indexOf("x")).replaceAll("[^0-9]", ""));
+        }
+        double constant = 0;
+        if(hasConstant) {
+            int start = functionPart.indexOf("+");
+            if(start == -1) {
+                start = functionPart.indexOf("-");
+            }
+            constant = Double.parseDouble((functionPart.substring(start).replaceAll("[^0-9]", "")));
+            if(functionPart.contains("-")) {
+                constant *= -1;
+            }
+        }
+        double exp = 1;
+        if(hasExp) {
+            int start = functionPart.indexOf("^");
+            int stop = functionPart.length();
+            if(hasRatio){
+                stop = functionPart.indexOf("/");
+            }
+            else if(hasConstant){
+                stop = functionPart.indexOf("+");
+                if(stop == -1) {
+                    stop = functionPart.indexOf("-");
+                }
+            }
+            String strExp = functionPart.substring(start, stop).replaceAll("[^0-9]", "");
+            exp = Double.parseDouble(functionPart.substring(start, stop).replaceAll("[^0-9]", ""));
+        }
+
+        double divisor = 1;
+        if(hasRatio) {
+            int start = functionPart.indexOf("/");
+            int stop = functionPart.length();
+            if(hasConstant) {
+                stop = functionPart.indexOf("+");
+                if(stop == -1) {
+                    stop = functionPart.indexOf("-");
+                }
+            }
+            divisor = Double.parseDouble(functionPart.substring(start,stop).replaceAll("[^0-9]", ""));
+        }
+
+        double[] yData = new double[xData.length];
+        for(int i = 0; i < yData.length; i++) {
+            yData[i] = coefficient * Math.pow(xData[i], exp) / divisor + constant;
+        }
+
+        return yData;
     }
 
     @Override
@@ -187,12 +162,16 @@ public class GraphCommand extends Command
             whatToAdd = "<div class=\"text-center\"><img src=\""+f.getName()+"\"></div>";
         }
         else if(isFuction(param)){
-            double[] xData = createXData(param);
-            //TODO parse user defined function, create xData and yData and uses createSimpleGraph to render the graph
-            double[] yData;
+            String functionPart = param.substring(param.indexOf("y"), param.indexOf(","));
+            File f = new File(CoreManager.getCoreManagerInstance(sessionId).getRoot()+ "/" + functionPart.replace(" ", "_") + ".png");
+            if(!f.exists()){
+                double[] xData = createXData(param);
+                double[] yData = createYData(xData, functionPart);
+                createSimpleGraph(xData, yData,f ,functionPart);
+            }
+            whatToAdd = "<div class=\"text-center\"><img src=\""+f.getName()+"\"></div>";
         }
         else {
-            //whatToAdd = "<div class=\"alert alert-danger\">Error: Did not recognise function, please try again.</div>";
             whatToAdd = "Function Parse Error";
         }
         //this.updateProperty.firePropertyChange("numGraphs", null, 1);

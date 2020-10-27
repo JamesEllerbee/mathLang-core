@@ -65,12 +65,8 @@ public class Driver
              commandsToRun = new String[]{
                 "help",
                 "current mode",
-                "show graph for ",
-                "show graph for simple constant function",
-                "show graph for simple linear function",
-                "show graph for simple quadratic function",
                 "show graph for y = 2x, [-10, 10]",
-
+                "show graph for y = x^3, [-10, 10]"
             };
         }
 
