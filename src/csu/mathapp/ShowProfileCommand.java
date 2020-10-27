@@ -13,6 +13,6 @@ public class ShowProfileCommand extends Command
     public void performAction(String param, String sessionId)
     {
         //TODO implement action
-        CoreManager.getCoreManagerInstance(sessionId).appendToBody("<div class=\"alert alert-warning\">Warning: The profile functionality has not been added to the web app!</div>");
+        CoreManager.getCoreManagerInstance(sessionId).appendToBody(ALERT_TYPE.INFORMATION,"The profile functionality is in development for the web app!");
     }
 }

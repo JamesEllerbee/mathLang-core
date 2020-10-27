@@ -13,6 +13,7 @@ public class ChangeModeCommand extends Command {
         CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
         String[] tokens = param.split(" ", 3);
         core.setCurrentMode(MODE.valueOf(tokens[2].toUpperCase().replace(' ', '_')));
-        core.appendToBody("<div class=\"alert alert-info\">Output mode changed to " + core.getCurrentMode().name().toLowerCase().replace('_', ' ') + "</div>");
+        //core.appendToBody("<div class=\"alert alert-info\">Output mode changed to " + core.getCurrentMode().name().toLowerCase().replace('_', ' ') + "</div>");
+        core.appendToBody(ALERT_TYPE.INFORMATION, "Output mode changed to " + core.getCurrentMode().name().toLowerCase().replace('_', ' '));
     }
 }

@@ -4,5 +4,6 @@ public enum ALERT_TYPE
 {
     INFORMATION,
     WARNING,
-    ERROR
+    ERROR,
+    SUCCESS
 }

@@ -609,7 +609,7 @@ public class SolveCommand extends Command
         }
         else
         {
-            core.appendToBody("<div class=\"alert alert-danger\">Error: Format error.</div>");
+            core.appendToBody(ALERT_TYPE.ERROR,"Format error.");
         }
     }
 }

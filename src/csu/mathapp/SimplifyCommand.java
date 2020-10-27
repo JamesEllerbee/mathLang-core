@@ -99,13 +99,7 @@ public class SimplifyCommand extends Command
                 curIndex++;
             }
         }
-/*
-        for(String ele : terms)
-        {
-            System.out.print(ele + ", ");
-        }
 
- */
         return terms;
 
     }
@@ -129,7 +123,7 @@ public class SimplifyCommand extends Command
     public void performAction(String param, String sessionId)
     {
         CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
-        core.appendToBody("<div class=\"alert alert-warning\">Warning: This command is not yet fully implemented!</div>");
+        core.appendToBody(ALERT_TYPE.WARNING,"This command is not yet fully implemented!");
         String[] tokens = param.split(" ", 2);
         if (isBinomialMultiplication(tokens[1]))
         {
@@ -152,7 +146,7 @@ public class SimplifyCommand extends Command
         }
         else
         {
-            core.appendToBody("<div class=\"alert alert-danger\">Expression not recognized or not currently supported</div>");
+            core.appendToBody(ALERT_TYPE.ERROR,"Expression not recognized or not currently supported");
         }
     }
 }

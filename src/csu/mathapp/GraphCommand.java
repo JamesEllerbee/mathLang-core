@@ -150,7 +150,7 @@ public class GraphCommand extends Command
     @Override
     public void performAction(String param, String sessionId)
     {
-        CoreManager.getCoreManagerInstance(sessionId).appendToBody("<div class=\"alert alert-warning\">Warning: The graph functionality is in development for web!</div>");
+        CoreManager.getCoreManagerInstance(sessionId).appendToBody(ALERT_TYPE.WARNING,"The graph functionality is in development for web!");
         String whatToAdd = "";
         if(param.contains("simple constant function")){
             File f = new File(CoreManager.getCoreManagerInstance(sessionId).getRoot() + "/simple-constant-function.png");
@@ -191,9 +191,16 @@ public class GraphCommand extends Command
             double[] yData;
         }
         else {
-            whatToAdd = "<div class=\"alert alert-danger\">Error: Did not recognise function, please try again.</div>";
+            //whatToAdd = "<div class=\"alert alert-danger\">Error: Did not recognise function, please try again.</div>";
+            whatToAdd = "Function Parse Error";
         }
         //this.updateProperty.firePropertyChange("numGraphs", null, 1);
-        CoreManager.getCoreManagerInstance(sessionId).appendToBody(whatToAdd);
+        if(whatToAdd.equals("Function Parse Error")) {
+            CoreManager.getCoreManagerInstance(sessionId).appendToBody(ALERT_TYPE.ERROR,"Did not recognise function, please try again.");
+        } else {
+            CoreManager.getCoreManagerInstance(sessionId).appendToBody(whatToAdd);
+        }
+
+
     }
 }

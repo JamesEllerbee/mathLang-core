@@ -62,10 +62,10 @@ public class CoreManager
     public void checkStep(String input) {
         //TODO finish this implementation
         if(input.equals(expectedInputs.get(0))){
-            appendToBody("yes");
+            appendToBody(ALERT_TYPE.SUCCESS, "Correct.");
             expectedInputs.remove(0);
         } else {
-            appendToBody("no");
+            appendToBody(ALERT_TYPE.ERROR, "Try again.");
         }
     }
 
@@ -124,13 +124,16 @@ public class CoreManager
             String alertTag = "%s";
             switch (alertType){
                 case INFORMATION:
-                    alertTag = "<div class=\"alert alert-info\">%s</div>";
+                    alertTag = "<div class=\"alert alert-info\"><img src=\"./assets/img/exclamation-circle.svg\" alt=\"\" width=\"32\" height=\"32\"> %s</div>";
                     break;
                 case WARNING:
                     alertTag = "<div class=\"alert alert-warning\">%s</div>";
                     break;
                 case ERROR:
-                    alertTag = "<div class=\"alert alert-danger\">%s</div>";
+                    alertTag = "<div class=\"alert alert-danger\"><img src=\"./assets/img/exclamation-circle-fill.svg\" alt=\"\" width=\"32\" height=\"32\"> %s</div>";
+                    break;
+                case SUCCESS:
+                    alertTag = "<div class=\"alert alert-success\"><img src=\"./assets/img/check2-circle.svg\" alt=\"\" width=\"32\" height=\"32\"> %s</div>";
                     break;
 
             }
