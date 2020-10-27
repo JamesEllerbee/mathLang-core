@@ -44,17 +44,15 @@ public class GraphCommand extends Command
     private double[] createXData(String inputStr) {
         int xLowLimit;
         int xHighLimit;
-        String domainStr;
+        String[] tokens;
         if(Pattern.matches("\\[-?\\d*,\\s?-?\\d*]", inputStr)){
-            domainStr = inputStr.replace("[", "").replace(",", " ").replace("]", "");
+            tokens = inputStr.split(",");
         } else {
-            String[] splitParam = inputStr.split(",", 2);
-            domainStr = splitParam[1].replace("[", "").replace(",", "").replace("]", "");
+            tokens = inputStr.split(",", 2);
+            tokens = tokens[1].split(",");
         }
-        Scanner domainScanner = new Scanner(domainStr);
-        xLowLimit = domainScanner.nextInt();
-        xHighLimit = domainScanner.nextInt();
-
+        xLowLimit = Integer.parseInt(tokens[0].replaceAll("[^-?0-9]", ""));
+        xHighLimit = Integer.parseInt(tokens[1].replaceAll("[^-?0-9]", ""));
         int xRange = (xHighLimit - xLowLimit) + 1;
         double[] xData = new double[xRange];
         for(int i = 0; i < xRange; i++) {
@@ -80,7 +78,7 @@ public class GraphCommand extends Command
             if(start == -1) {
                 start = functionPart.indexOf("-");
             }
-            constant = Double.parseDouble((functionPart.substring(start).replaceAll("[^0-9]", "")));
+            constant = Double.parseDouble((functionPart.substring(start).replaceAll("[^-?0-9]", "")));
             if(functionPart.contains("-")) {
                 constant *= -1;
             }
@@ -98,8 +96,7 @@ public class GraphCommand extends Command
                     stop = functionPart.indexOf("-");
                 }
             }
-            String strExp = functionPart.substring(start, stop).replaceAll("[^0-9]", "");
-            exp = Double.parseDouble(functionPart.substring(start, stop).replaceAll("[^0-9]", ""));
+            exp = Double.parseDouble(functionPart.substring(start, stop).replaceAll("[^-?0-9]", ""));
         }
 
         double divisor = 1;
@@ -112,7 +109,7 @@ public class GraphCommand extends Command
                     stop = functionPart.indexOf("-");
                 }
             }
-            divisor = Double.parseDouble(functionPart.substring(start,stop).replaceAll("[^0-9]", ""));
+            divisor = Double.parseDouble(functionPart.substring(start,stop).replaceAll("[^-?0-9]", ""));
         }
 
         double[] yData = new double[xData.length];
