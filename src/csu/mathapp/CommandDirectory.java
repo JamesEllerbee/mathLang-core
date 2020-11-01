@@ -81,7 +81,9 @@ public class CommandDirectory
         String a = "";
         for (Command cmd : commands)
         {
-            a += "<b>" + cmd.getName() + "</b>" + "\t: " + cmd.getDescription() + "<br>";
+            if(!cmd.isHide()){
+                a += "<b>" + cmd.getName() + "</b>" + "\t: " + cmd.getDescription() + "<br>";
+            }
         }
         return a;
     }

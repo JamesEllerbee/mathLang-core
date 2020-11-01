@@ -7,6 +7,7 @@ public class ShowProfileCommand extends Command
     {
         setName("show profile");
         setDescription("displays profile information");
+        setHide(true);
     }
 
     @Override

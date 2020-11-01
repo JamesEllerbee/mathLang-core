@@ -5,6 +5,7 @@ public class EverythingCommand extends Command
     public EverythingCommand() {
         super.setName("what is the answer to life, the universe, and everything?");
         super.setDescription("The ultimate question");
+        super.setHide(true);
     }
     @Override
     public void performAction(String param, String sessionId)

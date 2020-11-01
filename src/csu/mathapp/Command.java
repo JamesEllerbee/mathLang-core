@@ -7,6 +7,7 @@ public abstract class Command implements CommandInterface
 {
     private String name;
     private String description;
+    boolean hide;
 
     protected PropertyChangeSupport updateProperty; //todo fire property changes
 
@@ -40,4 +41,13 @@ public abstract class Command implements CommandInterface
         this.description = description;
     }
 
+    public boolean isHide()
+    {
+        return hide;
+    }
+
+    public void setHide(boolean hide)
+    {
+        this.hide = hide;
+    }
 }
