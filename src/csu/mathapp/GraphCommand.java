@@ -123,10 +123,16 @@ public class GraphCommand extends Command
     @Override
     public void performAction(String param, String sessionId)
     {
-        CoreManager.getCoreManagerInstance(sessionId).appendToBody(ALERT_TYPE.WARNING,"The graph functionality is in development for web!");
+        performAction(param, CoreManager.getCoreManagerInstance(sessionId));
+    }
+
+    @Override
+    public void performAction(String param, CoreManager cm)
+    {
+        cm.appendToBody(ALERT_TYPE.WARNING,"The graph functionality is in development for web!");
         String whatToAdd = "";
         if(param.contains("simple constant function")){
-            File f = new File(CoreManager.getCoreManagerInstance(sessionId).getRoot() + "/simple-constant-function.png");
+            File f = new File(cm.getRoot() + "/simple-constant-function.png");
             if(!f.exists()){
                 double[] xData = createXData(DEFAULT_DOMAIN);
                 double[] yData = new double[xData.length];
@@ -136,7 +142,7 @@ public class GraphCommand extends Command
             whatToAdd = "<div class=\"text-center\"><img src=\""+f.getName()+"\"></div>";
         }
         else if(param.contains("simple linear function")){
-            File f = new File(CoreManager.getCoreManagerInstance(sessionId).getRoot() + "/simple-linear-function.png");
+            File f = new File(cm.getRoot() + "/simple-linear-function.png");
 
             if(!f.exists()){
                 double[] xData = createXData(DEFAULT_DOMAIN);
@@ -147,7 +153,7 @@ public class GraphCommand extends Command
             whatToAdd = "<div class=\"text-center\"><img src=\""+f.getName()+"\"></div>";
         }
         else if(param.contains("simple quadratic function")){
-            File f = new File(CoreManager.getCoreManagerInstance(sessionId).getRoot() + "/simple-quadratic-function.png");
+            File f = new File(cm.getRoot() + "/simple-quadratic-function.png");
             if(!f.exists()){
                 double[] xData = createXData(DEFAULT_DOMAIN);
                 double[] yData = new double[xData.length];
@@ -160,7 +166,7 @@ public class GraphCommand extends Command
         }
         else if(isFuction(param)){
             String functionPart = param.substring(param.indexOf("y"), param.indexOf(","));
-            File f = new File(CoreManager.getCoreManagerInstance(sessionId).getRoot()+ "/" + functionPart.replace(" ", "_") + ".png");
+            File f = new File(cm.getRoot()+ "/" + functionPart.replace(" ", "_") + ".png");
             if(!f.exists()){
                 double[] xData = createXData(param);
                 double[] yData = createYData(xData, functionPart);
@@ -173,11 +179,9 @@ public class GraphCommand extends Command
         }
         //this.updateProperty.firePropertyChange("numGraphs", null, 1);
         if(whatToAdd.equals("Function Parse Error")) {
-            CoreManager.getCoreManagerInstance(sessionId).appendToBody(ALERT_TYPE.ERROR,"Did not recognise function, please try again.");
+            cm.appendToBody(ALERT_TYPE.ERROR,"Did not recognise function, please try again.");
         } else {
-            CoreManager.getCoreManagerInstance(sessionId).appendToBody(whatToAdd);
+            cm.appendToBody(whatToAdd);
         }
-
-
     }
 }

@@ -180,22 +180,20 @@ public class SolveCommand extends Command
         return coefficient;
     }
 
-    private void solveEquation(String equation, String[] tokens, char symbol, String sessionId)
+    private void solveEquation(String equation, String[] tokens, char symbol, CoreManager cm)
     {
-        CoreManager mfm = CoreManager.getCoreManagerInstance(sessionId);
-        //System.out.println("this is the equation: " + equation);
         boolean isStandardQuadraticForm = Pattern.matches("\\s*-?\\s*[0-9]*[a-z]\\^2\\s*[+-]\\s*-?\\s*[0-9]*[a-z]\\s*[+-]\\s*-?\\s*[0-9]+\\s*=\\s*0\\s*", equation) || Pattern.matches("\\s*-?[0-9]*[a-z]\\^2\\s*[+-]\\s*[0-9]*[a-z]\\s*=\\s*-?\\s*[0-9]\\s*", equation); //TODO check for equation of form ax^2 + bx + c = 0 or ax^2 + bx = c
         if (!isStandardQuadraticForm)
         {
-            solveLinearEquation(tokens, symbol, sessionId);
+            solveLinearEquation(tokens, symbol, cm);
         }
         else if (isStandardQuadraticForm)
         {
-            solveQuadraticEquation(tokens, symbol, "standard", sessionId);
+            solveQuadraticEquation(tokens, symbol, "standard", cm);
         }
         else
         {
-            mfm.appendToBody("<div class=\"alert alert-danger\"><strong>Error: Unable to solve in current arrangement!</div>");
+            cm.appendToBody(ALERT_TYPE.ERROR, "Unable to solve in current arrangement!");
             return;
         }
         if(updateProperty!=null)
@@ -242,9 +240,9 @@ public class SolveCommand extends Command
         return whatToAdd;
     }
 
-    private String output(String step, String decimalAns, MODE currentMode, CoreManager core)
+    private String output(String step, String decimalAns, CoreManager core)
     {
-        if (!step.equals("") && currentMode != MODE.OUTPUT)
+        if (!step.equals("") && core.getCurrentMode() != MODE.OUTPUT)
         {
             if (core.getCurrentMode() == MODE.INTERACTIVE)
             {
@@ -264,9 +262,8 @@ public class SolveCommand extends Command
      * @param tokens the array of tokens
      * @param symbol to solve the equation in terms of this symbol
      */
-    private void solveLinearEquation(String[] tokens, char symbol, String sessionId)
+    private void solveLinearEquation(String[] tokens, char symbol, CoreManager cm)
     {
-        CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
         //todo simplify the equation fist. order terms in descending degree, on both sides of the equal sign, respect order of operations
         int indexOfESign = -1;
         int indexOfSymbol = 0; //assuming at least one of the symbols are in the 0th index
@@ -286,19 +283,18 @@ public class SolveCommand extends Command
 
         if (tokens[0] != null && !tokens[0].contains("" + symbol))
         {
-            core.appendToBody("There was an error processing the equation, issue: bad ordering.<br>This tool is still in early development. This is an error on the tool's end and you did nothing wrong.");
+            cm.appendToBody("There was an error processing the equation, issue: bad ordering.<br>This tool is still in early development. This is an error on the tool's end and you did nothing wrong.");
             return;
         }
         else if (moreThanOneSymbol)
         {
-            core.appendToBody("Dealing with more than one symbol not implemented yet.");
+            cm.appendToBody("Dealing with more than one symbol not implemented yet.");
             return;
         }
 
         if (sameSymbolOnBothSides(tokens, indexOfESign, symbol))
         {
-            core.appendToBody("Group " + symbol + " on same side of the equation.");
-            //System.out.println("operation not support just yet... exiting.");
+            cm.appendToBody("Group " + symbol + " on same side of the equation.");
             return;
         }
 
@@ -311,7 +307,6 @@ public class SolveCommand extends Command
         }
 
         String step = "";
-        MODE currentMode = core.getCurrentMode();
 
         if (termIndex > 0)
         {
@@ -322,15 +317,15 @@ public class SolveCommand extends Command
 
             step = createStepString(tokens);
 
-            if (core.getCurrentMode() != MODE.OUTPUT)
+            if (cm.getCurrentMode() != MODE.OUTPUT)
             {
-                core.appendToBody("\tAdd " + (term * -1) + " to both sides");
+                cm.appendToBody("\tAdd " + (term * -1) + " to both sides");
             }
         }
 
-        if (currentMode != MODE.OUTPUT)
+        if (cm.getCurrentMode() != MODE.OUTPUT)
         {
-            step = output(step, "", currentMode, core);
+            step = output(step, "", cm);
             if (step.equals("return"))
             {
                 return;
@@ -354,16 +349,16 @@ public class SolveCommand extends Command
             }
 
             step = createStepString(tokens);
-            if (core.getCurrentMode() != MODE.OUTPUT)
+            if (cm.getCurrentMode() != MODE.OUTPUT)
             {
-                core.appendToBody("\tDivide by " + coefficient + " on both sides");
+                cm.appendToBody("\tDivide by " + coefficient + " on both sides");
             }
             decimalResult = step.contains("/") ? (" Decimal answer: " + (Integer.parseInt(previousTerm) / Double.parseDouble(coefficient))) : "";
         }
 
-        if (currentMode != MODE.OUTPUT)
+        if (cm.getCurrentMode() != MODE.OUTPUT)
         {
-            step = output(step, decimalResult, currentMode, core);
+            step = output(step, decimalResult, cm);
             if (step.equals("return"))
             {
                 return;
@@ -373,13 +368,13 @@ public class SolveCommand extends Command
         if (tokens[0] != null && tokens[0].contains("/"))
         {
             //todo expand for division e.g. x/2
-            core.appendToBody("\tDivide both sides by coeff.");
+            cm.appendToBody("\tDivide both sides by coeff.");
             return;
         }
 
-        if (currentMode != MODE.OUTPUT)
+        if (cm.getCurrentMode() != MODE.OUTPUT)
         {
-            step = output(step, decimalResult, currentMode, core);
+            step = output(step, decimalResult, cm);
             if (step.equals("return"))
             {
                 return;
@@ -390,9 +385,9 @@ public class SolveCommand extends Command
         {
             String expStr = getExp(tokens[indexOfSymbol]);
             int exp = Integer.parseInt(expStr);
-            if (exp == 2 && core.getCurrentMode() != MODE.OUTPUT)
+            if (exp == 2 && cm.getCurrentMode() != MODE.OUTPUT)
             {
-                core.appendToBody("\tTake the square root of both sides of the equation");
+                cm.appendToBody("\tTake the square root of both sides of the equation");
             }
             tokens[0] = "x";
             String result = "";
@@ -403,10 +398,10 @@ public class SolveCommand extends Command
             tokens[indexOfESign + 1] = result;
             step = createStepString(tokens);
         }
-        output(step, "", currentMode, core);
-        if (currentMode == MODE.OUTPUT)
+        output(step, "", cm);
+        if (cm.getCurrentMode() == MODE.OUTPUT)
         {
-            core.appendToBody("Answer: " + step + " " + decimalResult);
+            cm.appendToBody("Answer: " + step + " " + decimalResult);
         }
     }
 
@@ -441,9 +436,8 @@ public class SolveCommand extends Command
         return (root - Math.floor(root)) == 0;
     }
 
-    private void solveQuadraticEquation(String[] tokens, char symbol, String type, String sessionId)
+    private void solveQuadraticEquation(String[] tokens, char symbol, String type, CoreManager cm)
     {
-        CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
         //System.out.println("In solve quad equ method");
         if (type.equals("standard"))
         {
@@ -467,50 +461,50 @@ public class SolveCommand extends Command
             catch (Exception e)
             {
                 e.printStackTrace();
-                core.appendToBody("An unexpected error has occurred");
+                cm.appendToBody("An unexpected error has occurred");
                 return;
             }
-            core.appendToBody("Using the quadratic formula:<br>x = (-b ± √[b<sup>2</sup> - 4ac</span>])/2a");
+            cm.appendToBody("Using the quadratic formula:<br>x = (-b ± √[b<sup>2</sup> - 4ac</span>])/2a");
 
-            if (core.getCurrentMode() != MODE.OUTPUT)
+            if (cm.getCurrentMode() != MODE.OUTPUT)
             {
-                core.appendToBody("Substitute... a = " + a + ", b = " + b + ", c = " + c);
-                core.appendToBody("x = ( -(" + b + ") " + "± " + "√[(" + b + ")<sup>2</sup> - 4(" + a + ")(" + c + ")] ) / 2(" + a + ") )");
+                cm.appendToBody("Substitute... a = " + a + ", b = " + b + ", c = " + c);
+                cm.appendToBody("x = ( -(" + b + ") " + "± " + "√[(" + b + ")<sup>2</sup> - 4(" + a + ")(" + c + ")] ) / 2(" + a + ") )");
                 int b1 = b * -1;
                 int b2 = b * b;
                 int a1 = 2 * a;
                 int ac = 4 * a * c;
-                core.appendToBody(String.format("Simplify...<br>x = ( %d ± √[%d - %d] ) / %d", b1, b2,ac, a1));
+                cm.appendToBody(String.format("Simplify...<br>x = ( %d ± √[%d - %d] ) / %d", b1, b2,ac, a1));
                 //System.out.println(String.format("b2 = %d, ac = %d, b2 - ac = %d", b2, ac, b2-ac));
                 int radicand = b2 - ac;
-                core.appendToBody(String.format("x = ( %d ± √[%d] ) / %d", b1, radicand, a1));
+                cm.appendToBody(String.format("x = ( %d ± √[%d] ) / %d", b1, radicand, a1));
                 if(radicand == 0)
                 {
-                    core.appendToBody(String.format("Since √[0] = 0, therefore only one real solution...<br>x = %d / %d", b1, a1));
-                    core.appendToBody("Thus x = " + (b1 / a1));
+                    cm.appendToBody(String.format("Since √[0] = 0, therefore only one real solution...<br>x = %d / %d", b1, a1));
+                    cm.appendToBody("Thus x = " + (b1 / a1));
                 }
                 else if(isPerfectSquare(radicand))
                 {
                     int root = (int)(Math.sqrt(radicand));
-                    core.appendToBody(String.format("Since √[%d] = %d and -%d, there must be two real solutions...", radicand, root, root));
-                    core.appendToBody(String.format("x = (%d + %d)/%d, (%d - %d)/%d",b1,root,a1,b1,root,a1));
+                    cm.appendToBody(String.format("Since √[%d] = %d and -%d, there must be two real solutions...", radicand, root, root));
+                    cm.appendToBody(String.format("x = (%d + %d)/%d, (%d - %d)/%d",b1,root,a1,b1,root,a1));
                     int x1 = b1 + root;
                     int x2 = b1 - root;
-                    core.appendToBody(String.format("x = %d/%d, %d/%d", x1,a1,x2,a1));
+                    cm.appendToBody(String.format("x = %d/%d, %d/%d", x1,a1,x2,a1));
                     x1 = x1 / a1;
                     x2 = x2 / a1;
-                    core.appendToBody(String.format("x = %d, %d", x1, x2));
+                    cm.appendToBody(String.format("x = %d, %d", x1, x2));
                 }
                 else //not a perfect root
                 {
                     //do sqrt stuff
-                    core.appendToBody("Non perfect square result. approximating result...");
-                    core.appendToBody("Final Result: " + applyQuadraticFormula(a, b, c));
+                    cm.appendToBody("Non perfect square result. approximating result...");
+                    cm.appendToBody("Final Result: " + applyQuadraticFormula(a, b, c));
                 }
             }
             else
             {
-                core.appendToBody("Final Result: " + applyQuadraticFormula(a, b, c));
+                cm.appendToBody("Final Result: " + applyQuadraticFormula(a, b, c));
             }
         }
     }
@@ -598,18 +592,23 @@ public class SolveCommand extends Command
     @Override
     public void performAction(String param, String sessionId)
     {
-        CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
+        performAction(param, CoreManager.getCoreManagerInstance(sessionId));
+    }
+
+    @Override
+    public void performAction(String param, CoreManager cm)
+    {
         if (param.contains("="))
         {
             //this works for now, but in the future parse for a symbol until a ',' is found, probably strip whitespace
             char mainSymbol = param.charAt(this.getName().length() + 1);
             String theEquation = findEquation(param);
-            core.appendToBody("Solving for " + mainSymbol + ", given equation '" + theEquation + "'...");
-            solveEquation(theEquation, parseEquation(theEquation, mainSymbol), mainSymbol, sessionId);
+            cm.appendToBody("Solving for " + mainSymbol + ", given equation '" + theEquation + "'...");
+            solveEquation(theEquation, parseEquation(theEquation, mainSymbol), mainSymbol, cm);
         }
         else
         {
-            core.appendToBody(ALERT_TYPE.ERROR,"Format error.");
+            cm.appendToBody(ALERT_TYPE.ERROR,"Format error.");
         }
     }
 }

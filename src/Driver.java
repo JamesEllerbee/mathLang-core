@@ -15,24 +15,25 @@ public class Driver
             + "<link rel=\"stylesheet\" href=\"./assets/bootstrap.css\">"
             + "</head>";
 
-    final static String body = "<body class=\"theme\">"
-            + "<div class=\"jumbotron\">"
-            + "<h1 class=\"display-5 text-center\">MathApp.xyz!</h1>"
-            + "</div>"
-            + "<div class=\"main\">"
-            + "%s"
-            + "<br><hr>"
-            + "<div class=\"d-flex justify-content-center\">"
-            + "<form class=\"form-inline\" action=\"application\" method=\"post\">"
-            + "<div class=\"form-group mb-2\">"
-            + "<input class=\"form-control\" type=\"text\" id=\"command\" name=\"command\" </input>"
-            + "</div>"
-            +    "<button class=\"btn btn-primary mb-2\" type=\"submit\">Submit</button>"
-            + "</form>"
-            + "</div>"
+    final static String body =
+              "<body class=\"theme\">"
+                + "<div class=\"jumbotron text-center\">"
+                    + "<span class=\"display-4\">MathApp.xyz!</span>"
+                + "</div>"
+                + "<div class=\"main overflow-auto\" id=\"mainDiv\">"
+                    + "%s"
+                + "<br><hr>"
+                + "<div class=\"d-flex justify-content-center\">"
+                    + "<form class=\"form-inline\" action=\"\" method=\"post\">"
+                        + "<div class=\"form-group mb-2\">"
+                            + "<input class=\"form-control\" type=\"text\" id=\"command\" name=\"command\" </input>"
+                        + "</div>"
+                        + "<button class=\"btn btn-primary mb-2\" type=\"submit\">Submit</button>"
+                    + "</form>"
+                    + "</div>"
+                + "</div>"
+                + "<script src=\"./assets/js/autoScroll.js\"></script>"
             + "</body>";
-
-
 
     public static void main(String[] args)
     {

@@ -10,6 +10,12 @@ public class ClearCommand extends Command {
 
     @Override
     public void performAction(String param, String sessionId) {
-        CoreManager.getCoreManagerInstance(sessionId).appendToBody("");
+        performAction(param, CoreManager.getCoreManagerInstance(sessionId));
+    }
+
+    @Override
+    public void performAction(String param, CoreManager cm)
+    {
+        cm.appendToBody("");
     }
 }

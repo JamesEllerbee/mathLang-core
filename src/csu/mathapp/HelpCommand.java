@@ -12,15 +12,20 @@ public class HelpCommand extends Command
     @Override
     public void performAction(String param, String sessionId)
     {
-        CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
+        performAction(param, CoreManager.getCoreManagerInstance(sessionId));
+    }
+
+    @Override
+    public void performAction(String param, CoreManager cm)
+    {
         String[] tokens = param.split(" ", 2);
         if (tokens.length == 1)
         {
-            core.appendToBody("here are the available commands...<br>" + CommandDirectory.getCommandDescriptionsHTML());
+            cm.appendToBody("here are the available commands...<br>" + CommandDirectory.getCommandDescriptionsHTML());
         }
         else
         {
-            core.appendToBody(CommandDirectory.getCommandDescription(tokens[1]));
+            cm.appendToBody(CommandDirectory.getCommandDescription(tokens[1]));
         }
     }
 }

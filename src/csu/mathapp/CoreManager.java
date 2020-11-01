@@ -16,12 +16,13 @@ import java.util.List;
 
 public class CoreManager
 {
+    final int NUM_LINES = 99;
     int maxNumLines;
 
     private static HashMap<String, CoreManager> coreManagerInstances;
 
     /**
-     * Returns the CoreManager that is maped with the sessionId
+     * Returns the CoreManager that is mapped with the sessionId
      * @param sessionId
      * @return the current or new CoreManager
      */
@@ -32,7 +33,8 @@ public class CoreManager
 
         if(sessionId != null) {
            CoreManager cm = coreManagerInstances.get(sessionId);
-           if(cm == null) {
+           if(cm == null)
+           {
                cm = new CoreManager();
                coreManagerInstances.put(sessionId, cm);
            }
@@ -80,7 +82,7 @@ public class CoreManager
      */
     private CoreManager() {
         currentMode = MODE.STEP_BY_STEP;
-        lines = new CircularStringList(16);
+        lines = new CircularStringList(NUM_LINES);
         expectedInputs = new ArrayList<>();
         File f = new File("./.mathappconf");
         if(f.exists()) {
@@ -96,8 +98,18 @@ public class CoreManager
         }
         appendToBody("<strong>Initializing...</strong><br><strong>Current output mode</strong>: "
                 + "<span class=\"text-monospace\">" + currentMode.name().toLowerCase().replace('_', ' ') + "</span>.");
-
-        appendToBody(ALERT_TYPE.INFORMATION,"To get start, use command 'help' to see available commands and their descriptions");
+        appendToBody(ALERT_TYPE.INFORMATION,"To get start, use command 'help' to see available commands and their descriptions. Below are a few examples.");
+        String[] commandsToRun = new String[]{
+                "help",
+                "simplify (x + 2) (x + 4)",
+                "solve for x, 2x - 4 = 0",
+                "show graph for y = x^3, [-10, 10]"
+        };
+        for (String commandStr : commandsToRun)
+        {
+            appendToBody("> " + commandStr);
+            CommandDirectory.getCommand(commandStr, this).performAction(commandStr, this);
+        }
     }
 
     /**

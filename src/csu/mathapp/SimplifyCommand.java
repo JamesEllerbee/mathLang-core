@@ -122,16 +122,20 @@ public class SimplifyCommand extends Command
     @Override
     public void performAction(String param, String sessionId)
     {
-        CoreManager core = CoreManager.getCoreManagerInstance(sessionId);
-        core.appendToBody(ALERT_TYPE.WARNING,"This command is not yet fully implemented!");
+        performAction(param, CoreManager.getCoreManagerInstance(sessionId));
+    }
+
+    @Override
+    public void performAction(String param, CoreManager cm)
+    {
+        cm.appendToBody(ALERT_TYPE.WARNING,"This command is not yet fully implemented!");
         String[] tokens = param.split(" ", 2);
         if (isBinomialMultiplication(tokens[1]))
         {
-            core.appendToBody("The expression you have entered is binomial multiplication");
-            core.appendToBody("Use the <b>F.O.I.L</b> method, multiply the first, outer, inner, and last.");
-            core.appendToBody("<img src=\"https://calcworkshop.com/wp-content/uploads/foil-method-formula.png\" height=\"400\" width=\"600\">");
-            core.appendToBody("Therefore (ax + b)(cx + d) expanded = acx<sup>2</sup> + adx + bcx + bd");
-            //System.out.println(tokens[1].replace(" ", ""));
+            cm.appendToBody("The expression you have entered is binomial multiplication");
+            cm.appendToBody("Use the <b>F.O.I.L</b> method, multiply the first, outer, inner, and last.");
+            cm.appendToBody("<img src=\"https://calcworkshop.com/wp-content/uploads/foil-method-formula.png\" height=\"400\" width=\"600\">");
+            cm.appendToBody("Therefore (ax + b)(cx + d) expanded = acx<sup>2</sup> + adx + bcx + bd");
             String[] expr = parseTerms(tokens[1]);
             char symbol = getSymbol(tokens[1]);
             int a, b, c, d;
@@ -139,14 +143,13 @@ public class SimplifyCommand extends Command
             b = Integer.parseInt(getCoefficient(expr[1]));
             c = Integer.parseInt(getCoefficient(expr[2]));
             d = Integer.parseInt(getCoefficient(expr[3]));
-            core.appendToBody(String.format("Where a = %d, b = %d, c = %d, d = %d", a,b,c,d));
-            //System.out.println(String.format("%d %d %d %d",a,b,c,d));
-            core.appendToBody(String.format("(%d)(%d)%c<sup>2</sup> + (%d)(%d)%c + (%d)(%d)%c + (%d)(%d)",a,c,symbol,a,d,symbol,b,c,symbol,b,d));
-            core.appendToBody(String.format("%d%c<sup>2</sup> + %d%c + %d",a*c,symbol,a*d+b*c,symbol,b*d));
+            cm.appendToBody(String.format("Where a = %d, b = %d, c = %d, d = %d", a,b,c,d));
+            cm.appendToBody(String.format("(%d)(%d)%c<sup>2</sup> + (%d)(%d)%c + (%d)(%d)%c + (%d)(%d)",a,c,symbol,a,d,symbol,b,c,symbol,b,d));
+            cm.appendToBody(String.format("%d%c<sup>2</sup> + %d%c + %d",a*c,symbol,a*d+b*c,symbol,b*d));
         }
         else
         {
-            core.appendToBody(ALERT_TYPE.ERROR,"Expression not recognized or not currently supported");
+            cm.appendToBody(ALERT_TYPE.ERROR,"Expression not recognized or not currently supported");
         }
     }
 }

@@ -9,6 +9,12 @@ public class EverythingCommand extends Command
     @Override
     public void performAction(String param, String sessionId)
     {
-        CoreManager.getCoreManagerInstance(sessionId).appendToBody("42");
+        performAction(param, CoreManager.getCoreManagerInstance(sessionId));
+    }
+
+    @Override
+    public void performAction(String param, CoreManager cm)
+    {
+        cm.appendToBody("42");
     }
 }

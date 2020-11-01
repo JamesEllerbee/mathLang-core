@@ -25,10 +25,14 @@ public class CommandDirectory
         return null;
     }
 
-    public static Command getCommand(String command, String sesssionId)
-    {
+    public static Command getCommand(String command, CoreManager cm){
+        command = command.toLowerCase();
+        Command cmd = findCommand(command);
+        if(cmd != null) {
+            return cmd;
+        }
         String[] tokens = command.split(" ", 4);
-        Command cmd = findCommand(tokens[0]);
+        cmd = findCommand(tokens[0]);
         if (cmd == null && tokens.length >= 2)
         {
             cmd = findCommand(tokens[0] + " " + tokens[1]);
@@ -43,8 +47,13 @@ public class CommandDirectory
         {
             return cmd;
         }
-        CoreManager.getCoreManagerInstance(sesssionId).appendToBody(ALERT_TYPE.ERROR, "No such command!");
+        cm.appendToBody(ALERT_TYPE.ERROR, "No such command!");
         return null;
+    }
+
+    public static Command getCommand(String command, String sesssionId)
+    {
+        return getCommand(command, CoreManager.getCoreManagerInstance(sesssionId));
     }
 
     public static String getCommandDescriptions()
