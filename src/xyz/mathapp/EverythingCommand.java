@@ -1,4 +1,4 @@
-package csu.mathapp;
+package xyz.mathapp;
 
 public class EverythingCommand extends Command
 {

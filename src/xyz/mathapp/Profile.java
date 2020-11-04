@@ -1,4 +1,4 @@
-package csu.mathapp;
+package xyz.mathapp;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

@@ -1,4 +1,4 @@
-package csu.mathapp;
+package xyz.mathapp;
 
 import java.io.BufferedReader;
 import java.io.File;

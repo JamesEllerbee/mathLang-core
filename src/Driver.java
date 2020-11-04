@@ -1,7 +1,7 @@
-import csu.mathapp.Command;
-import csu.mathapp.CommandDirectory;
-import csu.mathapp.CoreManager;
-import csu.mathapp.MODE;
+import xyz.mathapp.Command;
+import xyz.mathapp.CommandDirectory;
+import xyz.mathapp.CoreManager;
+import xyz.mathapp.MODE;
 
 import java.io.*;
 

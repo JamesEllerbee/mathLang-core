@@ -1,4 +1,4 @@
-package csu.mathapp;
+package xyz.mathapp;
 
 import org.knowm.xchart.BitmapEncoder;
 import org.knowm.xchart.XYChart;
@@ -9,7 +9,6 @@ import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.util.Arrays;
 import java.util.regex.Pattern;
-import java.util.Scanner;
 
 public class GraphCommand extends Command
 {
@@ -166,7 +165,8 @@ public class GraphCommand extends Command
         }
         else if(isFuction(param)){
             String functionPart = param.substring(param.indexOf("y"), param.indexOf(","));
-            File f = new File(cm.getRoot()+ "/" + functionPart.replace(" ", "_") + ".png");
+            String functionName = param.substring(param.indexOf("y"));
+            File f = new File(cm.getRoot()+ "/" + functionName.replace(" ", "") + ".png");
             if(!f.exists()){
                 double[] xData = createXData(param);
                 double[] yData = createYData(xData, functionPart);

@@ -1,4 +1,4 @@
-package csu.mathapp;
+package xyz.mathapp;
 
 import java.beans.PropertyChangeSupport;
 import java.util.regex.Pattern;
