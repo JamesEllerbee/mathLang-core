@@ -40,6 +40,20 @@ public class GraphCommand extends Command
         }
     }
 
+    private String createFileName(String function) {
+        String fName = function.replaceAll(" ", "");
+        fName = fName.replaceAll("\\^", "carrot");
+        fName = fName.replaceAll("\\[", "LBracket");
+        fName = fName.replaceAll("]", "RBracket");
+        fName = fName.replaceAll(",", "_");
+        fName = fName.replaceAll("\\(", "LParen");
+        fName = fName.replaceAll("\\)", "RParen");
+        fName = fName.replaceAll("\\\\", "BSlash");
+        fName = fName.replaceAll("/", "Slash");
+        fName = fName.replaceAll("=", "Equals");
+        return fName;
+    }
+
     private double[] createXData(String inputStr) {
         int xLowLimit;
         int xHighLimit;
@@ -165,8 +179,7 @@ public class GraphCommand extends Command
         }
         else if(isFuction(param)){
             String functionPart = param.substring(param.indexOf("y"), param.indexOf(","));
-            String functionName = param.substring(param.indexOf("y"));
-            File f = new File(cm.getRoot()+ "/" + functionName.replace(" ", "") + ".png");
+            File f = new File(cm.getRoot()+ "/" + createFileName(param.substring(param.indexOf("y"))) + ".png");
             if(!f.exists()){
                 double[] xData = createXData(param);
                 double[] yData = createYData(xData, functionPart);
