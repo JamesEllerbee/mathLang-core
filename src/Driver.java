@@ -73,7 +73,7 @@ public class Driver
 
         for (String commandStr : commandsToRun)
         {
-            if(cm.getCurrentMode() == MODE.INTERACTIVE && cm.getExpectedInputs().size() > 0)
+            if(cm.getCurrentMode() == MODE.INTERACTIVE && cm.getSteps().size() > 0)
             {
                 cm.appendToBody("<img src=\"./assets/img/pencil-square.svg\" alt=\"\" width=\"32\" height=\"32\" title=\"Your Input\">> " + commandStr);
                 cm.checkStep(commandStr);

@@ -55,19 +55,20 @@ public class CoreManager
 
     private List<String> lines;
 
-    private List<String> expectedInputs;
+    private List<Step> steps;
 
-    public List<String> getExpectedInputs() {
-        return expectedInputs;
+    public List<Step> getSteps()
+    {
+        return steps;
     }
 
     public void checkStep(String input) {
         //TODO finish this implementation
-        if(input.equals(expectedInputs.get(0))){
+        if(input.replaceAll(" ", "").equals(steps.get(0).getExpectedInput())){
             appendToBody(ALERT_TYPE.SUCCESS, "Correct.");
-            expectedInputs.remove(0);
+            steps.remove(0);
         } else {
-            appendToBody(ALERT_TYPE.ERROR, "Try again.");
+            appendToBody(ALERT_TYPE.ERROR, "Try again. " + steps.get(0).getFeedBack());
         }
     }
 
@@ -83,7 +84,7 @@ public class CoreManager
     private CoreManager() {
         currentMode = MODE.STEP_BY_STEP;
         lines = new CircularStringList(NUM_LINES);
-        expectedInputs = new ArrayList<>();
+        steps = new ArrayList<>();
         File f = new File("./.mathappconf");
         if(f.exists()) {
             try {

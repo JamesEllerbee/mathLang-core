@@ -22,7 +22,7 @@ public class GraphCommand extends Command
         super.updateProperty = new PropertyChangeSupport(this);
     }
 
-    private boolean isFuction(String s) {
+    private boolean isFunction(String s) {
         return Pattern.matches("show graph for y\\s?=\\s?\\d*(\\.\\d+)?x?(\\^\\d*(\\.\\d+)?)?(/\\d?(\\.\\d+)?)?\\s?((\\+|-)\\s?\\d+)?\\s?,\\s?\\[-?\\d*,\\s?-?\\d*]",s);
     }
 
@@ -177,7 +177,7 @@ public class GraphCommand extends Command
             }
             whatToAdd = "<div class=\"text-center\"><img src=\""+f.getName()+"\"></div>";
         }
-        else if(isFuction(param)){
+        else if(isFunction(param)){
             String functionPart = param.substring(param.indexOf("y"), param.indexOf(","));
             File f = new File(cm.getRoot()+ "/" + createFileName(param.substring(param.indexOf("y"))) + ".png");
             if(!f.exists()){

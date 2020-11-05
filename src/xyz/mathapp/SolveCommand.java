@@ -246,7 +246,7 @@ public class SolveCommand extends Command
         {
             if (core.getCurrentMode() == MODE.INTERACTIVE)
             {
-                core.getExpectedInputs().add(step);
+                core.getSteps().add(new Step(step, "Are you applying the correct inverse operation? Did you make sure to start with the term furthest away from the x term?"));
             }
             else
             {
@@ -368,7 +368,7 @@ public class SolveCommand extends Command
         if (tokens[0] != null && tokens[0].contains("/"))
         {
             //todo expand for division e.g. x/2
-            cm.appendToBody("\tDivide both sides by coeff.");
+            cm.appendToBody("\tDivide both sides by coefficient.");
             return;
         }
 
