@@ -134,7 +134,7 @@ public class SimplifyCommand extends Command
         {
             cm.appendToBody("The expression you have entered is binomial multiplication");
             cm.appendToBody("Use the <b>F.O.I.L</b> method, multiply the first, outer, inner, and last.");
-            cm.appendToBody("<img src=\"https://calcworkshop.com/wp-content/uploads/foil-method-formula.png\" height=\"400\" width=\"600\">");
+            cm.appendToBody("<img src=\"https://calcworkshop.com/wp-content/uploads/foil-method-formula.png\" height=\"200\" width=\"300\">");
             cm.appendToBody("Therefore (ax + b)(cx + d) expanded = acx<sup>2</sup> + adx + bcx + bd");
             String[] expr = parseTerms(tokens[1]);
             char symbol = getSymbol(tokens[1]);

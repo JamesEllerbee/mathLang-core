@@ -67,7 +67,7 @@ public class Driver
                 "help",
                 "current mode",
                 "show graph for y = 2x, [-10, 10]",
-                "show graph for y = x^3, [-10, 10]"
+                "show graph for y = x^3, [-10, 10]",
             };
         }
 

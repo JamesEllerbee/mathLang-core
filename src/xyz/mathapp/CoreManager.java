@@ -122,7 +122,7 @@ public class CoreManager
         {
             if (whatToAdd.equals(""))
             {
-                lines.removeAll(null);
+                lines = new CircularStringList(NUM_LINES);
                 lines.add("Done.<br>");
             }
             else
