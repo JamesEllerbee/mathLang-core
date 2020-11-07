@@ -67,6 +67,9 @@ public class CoreManager
         if(input.replaceAll(" ", "").equals(steps.get(0).getExpectedInput())){
             appendToBody(ALERT_TYPE.SUCCESS, "Correct.");
             steps.remove(0);
+            if(!steps.isEmpty()){
+                appendToBody(steps.get(0).getOutput());
+            }
         } else {
             appendToBody(ALERT_TYPE.ERROR, "Try again. " + steps.get(0).getFeedBack());
         }

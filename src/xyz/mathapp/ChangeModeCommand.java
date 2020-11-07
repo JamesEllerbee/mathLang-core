@@ -5,7 +5,7 @@ public class  ChangeModeCommand extends Command {
     public ChangeModeCommand()
     {
         setName("change mode");
-        setDescription("Changes the output mode to the specified mode. Usage: change mode [new mode].");
+        setDescription("Changes the output mode to the specified mode, the valid modes are output, interactive, step by step. Usage: change mode [new mode].");
     }
 
     @Override

@@ -240,13 +240,13 @@ public class SolveCommand extends Command
         return whatToAdd;
     }
 
-    private String output(String step, String decimalAns, CoreManager core)
+    private String output(String output, String step, String decimalAns, CoreManager core)
     {
         if (!step.equals("") && core.getCurrentMode() != MODE.OUTPUT)
         {
             if (core.getCurrentMode() == MODE.INTERACTIVE)
             {
-                core.getSteps().add(new Step(step, "Are you applying the correct inverse operation? Did you make sure to start with the term furthest away from the x term?"));
+                core.getSteps().add(new Step(output, step, "Are you applying the correct inverse operation? Did you make sure to start with the term furthest away from the x term?"));
             }
             else
             {
@@ -267,7 +267,7 @@ public class SolveCommand extends Command
         //todo simplify the equation fist. order terms in descending degree, on both sides of the equal sign, respect order of operations
         int indexOfESign = -1;
         int indexOfSymbol = 0; //assuming at least one of the symbols are in the 0th index
-        //boolean moreThanOneSymbol = false;
+
         boolean moreThanOneSymbol = hasDifferentSymbols(tokens, symbol); //set true if found a non-numeric character that isn't the main symbol, =, +, -, /, etc
 
         for (int i = 0; i < tokens.length; i++)
@@ -283,12 +283,12 @@ public class SolveCommand extends Command
 
         if (tokens[0] != null && !tokens[0].contains("" + symbol))
         {
-            cm.appendToBody("There was an error processing the equation, issue: bad ordering.<br>This tool is still in early development. This is an error on the tool's end and you did nothing wrong.");
+            cm.appendToBody(ALERT_TYPE.ERROR,"There was an error processing the equation, issue: bad ordering.<br>This tool is still in early development. This is an error on the tool's end and you did nothing wrong.");
             return;
         }
         else if (moreThanOneSymbol)
         {
-            cm.appendToBody("Dealing with more than one symbol not implemented yet.");
+            cm.appendToBody(ALERT_TYPE.WARNING,"Dealing with more than one symbol not implemented yet.");
             return;
         }
 
@@ -307,7 +307,7 @@ public class SolveCommand extends Command
         }
 
         String step = "";
-
+        String outp = "";
         if (termIndex > 0)
         {
             int term = Integer.parseInt(tokens[termIndex]);
@@ -319,13 +319,16 @@ public class SolveCommand extends Command
 
             if (cm.getCurrentMode() != MODE.OUTPUT)
             {
-                cm.appendToBody("\tAdd " + (term * -1) + " to both sides");
+                outp = "\tAdd " + (term * -1) + " to both sides";
+                if(cm.getCurrentMode() == MODE.STEP_BY_STEP) {
+                    cm.appendToBody(outp);
+                }
             }
         }
 
         if (cm.getCurrentMode() != MODE.OUTPUT)
         {
-            step = output(step, "", cm);
+            step = output(outp, step, "", cm);
             if (step.equals("return"))
             {
                 return;
@@ -351,14 +354,17 @@ public class SolveCommand extends Command
             step = createStepString(tokens);
             if (cm.getCurrentMode() != MODE.OUTPUT)
             {
-                cm.appendToBody("\tDivide by " + coefficient + " on both sides");
+                outp = "\tDivide by " + coefficient + " on both sides";
+                if(cm.getCurrentMode() == MODE.STEP_BY_STEP) {
+                    cm.appendToBody(outp);
+                }
             }
             decimalResult = step.contains("/") ? (" Decimal answer: " + (Integer.parseInt(previousTerm) / Double.parseDouble(coefficient))) : "";
         }
 
         if (cm.getCurrentMode() != MODE.OUTPUT)
         {
-            step = output(step, decimalResult, cm);
+            step = output(outp, step, decimalResult, cm);
             if (step.equals("return"))
             {
                 return;
@@ -374,7 +380,7 @@ public class SolveCommand extends Command
 
         if (cm.getCurrentMode() != MODE.OUTPUT)
         {
-            step = output(step, decimalResult, cm);
+            step = output(outp, step, decimalResult, cm);
             if (step.equals("return"))
             {
                 return;
@@ -387,7 +393,10 @@ public class SolveCommand extends Command
             int exp = Integer.parseInt(expStr);
             if (exp == 2 && cm.getCurrentMode() != MODE.OUTPUT)
             {
-                cm.appendToBody("\tTake the square root of both sides of the equation");
+                outp = "\tTake the square root of both sides of the equation";
+                if(cm.getCurrentMode() == MODE.INTERACTIVE) {
+                    cm.appendToBody(outp);
+                }
             }
             tokens[0] = "x";
             String result = "";
@@ -398,7 +407,7 @@ public class SolveCommand extends Command
             tokens[indexOfESign + 1] = result;
             step = createStepString(tokens);
         }
-        output(step, "", cm);
+        output(outp, step, "", cm);
         if (cm.getCurrentMode() == MODE.OUTPUT)
         {
             cm.appendToBody("Answer: " + step + " " + decimalResult);
@@ -605,6 +614,9 @@ public class SolveCommand extends Command
             String theEquation = findEquation(param);
             cm.appendToBody("Solving for " + mainSymbol + ", given equation '" + theEquation + "'...");
             solveEquation(theEquation, parseEquation(theEquation, mainSymbol), mainSymbol, cm);
+            if(cm.getCurrentMode() == MODE.INTERACTIVE) {
+                cm.appendToBody(cm.getSteps().get(0).getOutput());
+            }
         }
         else
         {
